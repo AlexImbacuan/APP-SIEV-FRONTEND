@@ -1,205 +1,143 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
 
 :root {
-  --brand-blue: #3333ff;
-  --brand-blue-deep: #2424b8;
-  --brand-orange: #ff5b3a;
-  --page-bg: #f7f9ff;
-  --card-bg: #ffffff;
-  --panel-border: #e2e8f7;
-  --text-main: #1d2744;
-  --text-muted: #5d6b8b;
-  --shadow-main: 0 16px 40px rgba(29, 39, 68, 0.1);
+  --brand-blue: #6f8cff;
+  --brand-orange: #ff8a4c;
+  --text-main: #eef2ff;
+  --text-soft: #a9b4d0;
+  --surface: #11182a;
+  --line: #25304a;
+  --page-gradient: radial-gradient(circle at top, #151c2d 0%, #0b1020 55%, #070b14 100%);
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
-  color: var(--text-main);
-  background: var(--page-bg);
-}
-
-.app-shell {
-  position: relative;
+.site {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 34px;
-}
-
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(51, 51, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(51, 51, 255, 0.04) 1px, transparent 1px);
-  background-size: 36px 36px;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.enterprise-card {
-  position: relative;
-  z-index: 1;
-  width: min(820px, 100%);
-  padding: 40px;
-  border-radius: 14px;
-  background: var(--card-bg);
-  border: 1px solid var(--panel-border);
-  box-shadow: var(--shadow-main);
-  text-align: left;
-  overflow: hidden;
-  animation: card-enter 0.55s ease-out both;
-}
-
-.enterprise-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 5px;
-  height: 100%;
-  background: var(--brand-blue);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--brand-blue);
-  border: 1px solid rgba(51, 51, 255, 0.18);
-  background: rgba(51, 51, 255, 0.06);
-}
-
-.company-tag {
-  font-family: 'Exo 2', 'Segoe UI', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--brand-orange);
-}
-
-.title-siev {
-  margin: 20px 0 0;
-  font-family: 'Exo 2', 'Segoe UI', sans-serif;
-  font-size: clamp(2rem, 4.5vw, 3.15rem);
-  line-height: 1.08;
-  letter-spacing: 0.01em;
-  max-width: 700px;
-}
-
-.subtitle-siev {
-  margin: 16px 0 0;
-  max-width: 680px;
-  font-size: 1.12rem;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-
-.info-row {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.info-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-width: 220px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #e4eaf8;
-  background: #f9fbff;
+  background: var(--page-gradient);
+  color: var(--text-main);
 }
 
-.info-label {
-  font-size: 0.75rem;
+.site-main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 5px 20px 38px;
+  flex: 1;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(20, 27, 44, 0.92), rgba(11, 16, 32, 0.96));
+  border: 1px solid rgba(111, 140, 255, 0.18);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
+}
+
+.hero-badge {
+  margin: 0;
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: #dfe7ff;
+  background: rgba(111, 140, 255, 0.14);
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #7182ad;
 }
 
-.info-item strong {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: #1f2d52;
-}
-
-.mail-button {
-  margin-top: 30px;
-  border: 1px solid var(--brand-blue);
-  border-radius: 10px;
-  padding: 13px 22px;
-  background: var(--brand-blue);
-  color: #ffffff;
+.hero h2 {
+  margin: 14px 0 8px;
   font-family: 'Exo 2', 'Segoe UI', sans-serif;
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
-  box-shadow: 0 8px 20px rgba(51, 51, 255, 0.22);
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.08;
 }
 
-.mail-button:hover {
-  transform: translateY(-1px);
-  background: var(--brand-blue-deep);
-  box-shadow: 0 12px 22px rgba(51, 51, 255, 0.28);
+.hero p {
+  margin: 0;
+  max-width: 64ch;
+  line-height: 1.6;
+  color: var(--text-soft);
 }
 
-.mail-button:active {
-  transform: translateY(0);
+.hero-cta {
+  margin-top: 20px;
+  display: inline-block;
+  border-radius: 10px;
+  border: 1px solid rgba(111, 140, 255, 0.35);
+  background: linear-gradient(135deg, var(--brand-blue), #4d66e6);
+  color: #ffffff;
+  padding: 11px 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-@keyframes card-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.99);
-  }
+.hero-cta:hover {
+  filter: brightness(0.95);
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+.content-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.content-grid:last-of-type {
+  margin-bottom: 0;
+}
+
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.content-card h3 {
+  margin: 0;
+  font-family: 'Exo 2', 'Segoe UI', sans-serif;
+  font-size: 1.2rem;
+}
+
+.content-card p {
+  margin: 10px 0 0;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.site-footer {
+  border-top: 1px solid rgba(37, 48, 74, 0.9);
+  padding: 16px 20px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.94rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 768px) {
-  .app-shell {
-    padding: 18px;
+@media (max-width: 640px) {
+  .site-main,
+  .site-footer {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
-  .enterprise-card {
-    padding: 28px 22px;
+  .hero {
+    padding: 20px 16px;
   }
-
-  .subtitle-siev {
-    font-size: 1rem;
-  }
-
-  .info-item {
-    min-width: 100%;
-  }
-
-  .mail-button {
+  .hero-cta {
     width: 100%;
+    text-align: center;
   }
 }
