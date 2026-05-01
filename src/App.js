@@ -1,41 +1,50 @@
+import Header from './components/Header';
+import ImageRibbon from './components/ImageRibbon';
 import './App.css';
+import React from 'react';
+
 
 function App() {
-  const openMail = () => {
-    window.location.href = 'https://eliezer.colombiahosting.com.co:2096/logout/?locale=es';
-  };
+  
 
   return (
-    <main className="app-shell">
-      <div className="grid-overlay" aria-hidden="true" />
+    <div className="site">
+      <Header />
 
-      <section className="enterprise-card">
-        <header className="card-header">
-          <span className="status-pill">Portal corporativo</span>
-          <span className="company-tag">SIEV</span>
-        </header>
+      <main className="site-main" id="inicio">
+        <section className="hero" aria-labelledby="hero-title">
+          <ImageRibbon />
+          {/* <h2 id="hero-title">Soluciones Integrales Eléctricas del Valle</h2>
+          <p>
+            Estructura base de pagina lista para crecer: clara, ordenada y optimizada para escritorio y
+            dispositivos moviles.
+          </p> */}
+        </section>
 
-        <h1 className="title-siev">Soluciones Integrales Electricas del Valle</h1>
-        <p className="subtitle-siev">
-          Plataforma de acceso a servicios internos para operaciones tecnicas y administrativas.
-        </p>
+        
 
-        <div className="info-row" aria-hidden="true">
-          <div className="info-item">
-            <span className="info-label">Sector</span>
-            <strong>Servicios electricos</strong>
-          </div>
-          <div className="info-item">
-            <span className="info-label">Acceso</span>
-            <strong>Correo institucional</strong>
-          </div>
-        </div>
+        <section className="content-grid" id="servicios" aria-label="Servicios principales">
+          <article className="content-card">
+            <h3>Instalaciones</h3>
+            <p>Diseno e implementacion de redes electricas residenciales, comerciales e industriales.</p>
+          </article>
 
-        <button className="mail-button" onClick={openMail}>
-          Abrir correo SIEV
-        </button>
-      </section>
-    </main>
+          <article className="content-card" id="nosotros">
+            <h3>Mantenimiento</h3>
+            <p>Planes preventivos y correctivos para mejorar continuidad, seguridad y rendimiento.</p>
+          </article>
+
+          <article className="content-card" id="contacto">
+            <h3>Asesoria tecnica</h3>
+            <p>Acompanamiento profesional para normativas, auditorias y optimizacion energetica.</p>
+          </article>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <p>© {new Date().getFullYear()} SIEV. Todos los derechos reservados.</p>
+      </footer>
+    </div>
   );
 }
 
