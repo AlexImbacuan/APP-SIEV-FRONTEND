@@ -1,0 +1,380 @@
+.project-form-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 28px 20px 40px;
+  background: var(--page-gradient, radial-gradient(circle at top, #151c2d 0%, #0b1020 55%, #070b14 100%));
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.form-eyebrow {
+  margin: 0 0 6px;
+  color: #ff9a66;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.form-title {
+  margin: 0;
+  font-family: 'Exo 2', 'Segoe UI', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--text-main, #eef2ff);
+}
+
+.form-subtitle {
+  margin: 8px 0 0;
+  color: var(--text-soft, #a9b4d0);
+  max-width: 72ch;
+  line-height: 1.55;
+}
+
+.add-activity-btn,
+.export-btn,
+.remove-activity-btn {
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+.add-activity-btn {
+  padding: 12px 18px;
+  color: #0d1324;
+  background: linear-gradient(135deg, #f7fbff, #dfe8ff);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  white-space: nowrap;
+}
+
+.add-activity-btn:hover,
+.export-btn:hover:not(:disabled),
+.remove-activity-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.form-message {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(111, 140, 255, 0.12);
+  border: 1px solid rgba(111, 140, 255, 0.24);
+  color: #dfe7ff;
+}
+
+.report-capture {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
+}
+
+.report-top {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 22px;
+  align-items: start;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #dce4f5;
+  margin-bottom: 22px;
+}
+
+.report-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.report-logo {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #f7f9ff;
+  border: 1px solid #e1e7f3;
+  padding: 8px;
+}
+
+.report-brand h2 {
+  margin: 0;
+  font-family: 'Exo 2', 'Segoe UI', sans-serif;
+  font-size: 1.8rem;
+}
+
+.report-brand p {
+  margin: 4px 0 0;
+  color: #52607c;
+}
+
+.report-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.activity-card {
+  background: #f9fbff;
+  border: 1px solid #dfe7f4;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+.activity-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.activity-number {
+  margin: 0 0 4px;
+  color: #6f8cff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.activity-card h3 {
+  margin: 0;
+  font-family: 'Exo 2', 'Segoe UI', sans-serif;
+  font-size: 1.25rem;
+  color: #13203f;
+}
+
+.remove-activity-btn {
+  padding: 10px 14px;
+  color: #8b1538;
+  background: rgba(251, 113, 133, 0.14);
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.activity-bottom {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  min-width: 0;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #1e2d4d;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfd9ea;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #6f8cff;
+  box-shadow: 0 0 0 3px rgba(111, 140, 255, 0.14);
+}
+
+.form-group input:read-only {
+  background: #eef3fb;
+  color: #475569;
+}
+
+.image-upload-box {
+  border: 1px dashed #aebedd;
+  border-radius: 16px;
+  padding: 16px;
+  background: #f7faff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.image-upload-label {
+  font-weight: 700;
+  color: #1e2d4d;
+}
+
+.image-upload-box input[type='file'] {
+  font-size: 0.92rem;
+}
+
+.image-preview,
+.image-placeholder {
+  min-height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #edf2fb;
+  border: 1px solid #d6e1f0;
+}
+
+.image-preview {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-preview img {
+  width: 100%;
+  flex: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.image-preview span {
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: #51607c;
+  background: #f8fbff;
+  border-top: 1px solid #dbe5f2;
+}
+
+.image-placeholder {
+  display: grid;
+  place-items: center;
+  color: #7a8ca9;
+  font-weight: 600;
+}
+
+.report-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #dce4f5;
+  margin-top: 4px;
+}
+
+.report-summary p {
+  margin: 0 0 4px;
+  color: #52607c;
+  font-weight: 600;
+}
+
+.report-summary h3 {
+  margin: 0;
+  font-size: 1.9rem;
+  color: #13203f;
+}
+
+.export-btn {
+  padding: 14px 20px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6f8cff, #4d66e6);
+  box-shadow: 0 10px 24px rgba(111, 140, 255, 0.24);
+}
+
+.export-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .report-top,
+  .activity-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .report-meta-grid,
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-preview,
+  .image-placeholder {
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-form-container {
+    padding: 20px 14px 32px;
+  }
+
+  .report-capture {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .form-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .report-brand {
+    align-items: flex-start;
+  }
+
+  .report-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .report-summary h3 {
+    font-size: 1.55rem;
+  }
+}
+
+@media print {
+  .project-form-container {
+    background: #ffffff;
+    padding: 0;
+  }
+
+  .form-header,
+  .add-activity-btn,
+  .export-btn,
+  .remove-activity-btn,
+  .form-message {
+    display: none !important;
+  }
+
+  .report-capture {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .activity-card {
+    break-inside: avoid;
+  }
+}
