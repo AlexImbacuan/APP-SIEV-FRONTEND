@@ -43,6 +43,7 @@
 }
 
 .add-activity-btn,
+.send-btn,
 .export-btn,
 .remove-activity-btn {
   border: 0;
@@ -61,6 +62,7 @@
 }
 
 .add-activity-btn:hover,
+.send-btn:hover:not(:disabled),
 .export-btn:hover:not(:disabled),
 .remove-activity-btn:hover {
   transform: translateY(-1px);
@@ -284,6 +286,24 @@
   margin-top: 4px;
 }
 
+.summary-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.send-btn {
+  padding: 14px 20px;
+  color: #173160;
+  background: linear-gradient(135deg, #eef3ff, #dbe6ff);
+  box-shadow: 0 10px 24px rgba(79, 102, 161, 0.18);
+}
+
+.send-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .report-summary p {
   margin: 0 0 4px;
   color: #52607c;
@@ -347,6 +367,15 @@
   .report-summary {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .summary-actions {
+    width: 100%;
+  }
+
+  .send-btn,
+  .export-btn {
+    width: 100%;
   }
 
   .report-summary h3 {
