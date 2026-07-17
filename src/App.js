@@ -36,7 +36,7 @@ function App() {
     };
 
     traerempleados();
-  }, []);
+  });
 
   const handleLogin = (usuario) => {
     setIsAuthenticated(true);

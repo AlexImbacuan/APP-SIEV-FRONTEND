@@ -4,6 +4,10 @@ const API_BASE_URL = (
 const AUTH_REFRESH = process.env.REACT_APP_AUTH_REFRESH || '/auth/refresh';
 
 function buildUrl(path) {
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   return `${API_BASE_URL}${normalizedPath}`;
 }
