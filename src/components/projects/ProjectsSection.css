@@ -1,5 +1,6 @@
 .projects-section {
   width: 100%;
+  min-width: 0;
 }
 
 .section-header {
@@ -33,19 +34,36 @@
 
 .projects-list-area {
   margin-top: 24px;
+  min-width: 0;
 }
 
 .projects-table-wrapper {
+  display: block;
   overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid rgba(111, 140, 255, 0.15);
   border-radius: 12px;
   background: rgba(111, 140, 255, 0.04);
+  -webkit-overflow-scrolling: touch;
 }
 
 .projects-table {
   width: 100%;
   min-width: 960px;
   border-collapse: collapse;
+}
+
+.projects-table th,
+.projects-table td {
+  white-space: nowrap;
+}
+
+.projects-table .col-description,
+.projects-table .col-observation {
+  white-space: normal;
 }
 
 .projects-table thead th {
@@ -141,5 +159,51 @@
 
   .projects-form-card {
     padding: 16px;
+  }
+
+  .projects-table {
+    min-width: 980px;
+  }
+
+  .projects-table thead th,
+  .projects-table tbody td {
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  .col-serial {
+    width: 16%;
+  }
+
+  .col-description {
+    width: 28%;
+  }
+
+  .col-value {
+    width: 14%;
+  }
+
+  .col-invoice {
+    width: 10%;
+  }
+
+  .col-payment {
+    width: 10%;
+  }
+
+  .col-observation {
+    width: 18%;
+  }
+
+  .col-actions {
+    width: 14%;
+  }
+
+  .table-actions {
+    flex-direction: column;
+  }
+
+  .table-actions button {
+    width: 100%;
   }
 }

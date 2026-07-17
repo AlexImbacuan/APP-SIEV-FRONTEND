@@ -318,13 +318,13 @@ export default function ProjectsSection() {
             <table className="projects-table">
               <thead>
                 <tr>
-                  <th>Serial</th>
-                  <th>Descripción</th>
-                  <th>Valor total</th>
-                  <th>Factura</th>
-                  <th>Pago</th>
-                  <th>Observación</th>
-                  <th>Acciones</th>
+                  <th className="col-serial">Serial</th>
+                  <th className="col-description">Descripción</th>
+                  <th className="col-value">Valor total</th>
+                  <th className="col-invoice">Factura</th>
+                  <th className="col-payment">Pago</th>
+                  <th className="col-observation">Observación</th>
+                  <th className="col-actions">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -339,13 +339,15 @@ export default function ProjectsSection() {
 
                   return (
                     <tr key={getProjectIdentifier(project) || index}>
-                      <td>{serial}</td>
-                      <td>{descripcion}</td>
-                      <td>{valorTotal}</td>
-                      <td>{factura}</td>
-                      <td>{String(pago) === 'true' || pago === true ? 'Sí' : 'No'}</td>
-                      <td>{observacion}</td>
-                      <td>
+                      <td className="col-serial">{serial}</td>
+                      <td className="col-description">{descripcion}</td>
+                      <td className="col-value">{valorTotal}</td>
+                      <td className="col-invoice">{factura}</td>
+                      <td className="col-payment">
+                        {String(pago) === 'true' || pago === true ? 'Sí' : 'No'}
+                      </td>
+                      <td className="col-observation">{observacion}</td>
+                      <td className="col-actions">
                         <div className="table-actions">
                           <button
                             type="button"
