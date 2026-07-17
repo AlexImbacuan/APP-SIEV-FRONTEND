@@ -3,7 +3,7 @@ import { apiRequest } from './apiClient';
 const REPORTS_ENDPOINT =
   process.env.REACT_APP_PROJECTS_ENDPOINT ||
   process.env.REACT_APP_REPORTS_ENDPOINT ||
-  'http://localhost:8080/api/proyectos';
+  'https://app-siev-backend.onrender.com/api/proyectos';
 
 export async function createProjectReport(reportPayload) {
   // apiRequest will stringify plain objects and set appropriate headers

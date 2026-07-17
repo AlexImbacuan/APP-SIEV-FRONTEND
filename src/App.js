@@ -24,20 +24,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    const traerempleados = async () => {
-      try {
-        const response = await fetch('https://app-siev-backend.onrender.com/api/empleados');
-        const data = await response.json();
-        console.log('Empleados:', data);
-      } catch (error) {
-        console.error('Error al traer empleados:', error);
-      }
-    };
-
-    traerempleados();
-  });
-
   const handleLogin = (usuario) => {
     setIsAuthenticated(true);
     setCurrentUser(usuario);
