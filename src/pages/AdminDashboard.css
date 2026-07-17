@@ -375,6 +375,90 @@
   font-weight: 600;
 }
 
+.projects-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(111, 140, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(111, 140, 255, 0.04);
+}
+
+.projects-table {
+  width: 100%;
+  min-width: 960px;
+  border-collapse: collapse;
+}
+
+.projects-table thead th {
+  text-align: left;
+  padding: 14px 16px;
+  background: rgba(111, 140, 255, 0.1);
+  color: #eef2ff;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(111, 140, 255, 0.15);
+}
+
+.projects-table tbody td {
+  padding: 14px 16px;
+  color: #d9e1ff;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(111, 140, 255, 0.08);
+  vertical-align: top;
+}
+
+.projects-table tbody tr:hover {
+  background: rgba(111, 140, 255, 0.05);
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 24, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 40;
+}
+
+.confirm-modal {
+  width: 100%;
+  max-width: 460px;
+  background: #182342;
+  border: 1px solid rgba(111, 140, 255, 0.22);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+.confirm-modal h3 {
+  margin: 0 0 12px 0;
+  color: #eef2ff;
+  font-size: 20px;
+}
+
+.confirm-modal p {
+  margin: 0 0 12px 0;
+  color: #aab4d6;
+  line-height: 1.5;
+}
+
+.confirm-modal-copy {
+  color: #ffb4b4;
+  font-size: 13px;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .dashboard-container {
@@ -403,6 +487,10 @@
   .section-header {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .confirm-modal-actions {
+    flex-direction: column;
   }
 }
 
