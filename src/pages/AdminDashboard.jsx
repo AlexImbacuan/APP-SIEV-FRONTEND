@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import Header from '../components/Header';
 import ProfileModal from '../components/ProfileModal';
 import ProjectForm from './ProjectForm';
+import { createProjectReport } from '../services/projectReportService';
 import './AdminDashboard.css';
 
 const AdminDashboard = ({ onLogout, usuario, onNavigate }) => {
@@ -28,8 +29,16 @@ const AdminDashboard = ({ onLogout, usuario, onNavigate }) => {
     );
   }, [activities, searchTerm]);
 
-  const handleEditActivity = (activity) => {
+  const handleEditActivity = () => {
     setCurrentView('activities-form');
+  };
+
+  const parsePagoToBoolean = (value) => {
+    if (typeof value === 'boolean') return value;
+    const normalized = String(value || '')
+      .trim()
+      .toLowerCase();
+    return ['true', '1', 'si', 'sí', 'yes', 'pagado'].includes(normalized);
   };
 
   const handleDeleteActivity = (id) => {
@@ -163,10 +172,27 @@ const AdminDashboard = ({ onLogout, usuario, onNavigate }) => {
                 <h2>Proyectos</h2>
                 <form
                   className="project-form"
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     // validar mínimos
                     if (!projectForm.serialProyecto) return alert('Ingrese Serial de proyecto');
+
+                    const payload = {
+                      serial: projectForm.serialProyecto,
+                      descripcionGlobal: projectForm.descripcionGlobal,
+                      valorTotal: Number(projectForm.valorTotal || 0),
+                      factura: Number(projectForm.factura || 0),
+                      pago: parsePagoToBoolean(projectForm.pago),
+                      observacion: projectForm.observacion,
+                    };
+
+                    try {
+                      await createProjectReport(payload);
+                    } catch (error) {
+                      alert(`Error al enviar proyecto: ${error.message}`);
+                      return;
+                    }
+
                     setProjects([
                       ...projects,
                       {
