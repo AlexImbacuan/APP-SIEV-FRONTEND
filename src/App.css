@@ -10,102 +10,13 @@
   --page-gradient: radial-gradient(circle at top, #151c2d 0%, #0b1020 55%, #070b14 100%);
 }
 
+/* Layout del panel de administración (AdminDashboard) */
 .site {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: var(--page-gradient);
   color: var(--text-main);
-}
-
-.site-main {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 5px 20px 38px;
-  flex: 1;
-}
-
-.hero {
-  background: linear-gradient(135deg, rgba(20, 27, 44, 0.92), rgba(11, 16, 32, 0.96));
-  border: 1px solid rgba(111, 140, 255, 0.18);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
-}
-
-.hero-badge {
-  margin: 0;
-  display: inline-flex;
-  padding: 6px 12px;
-  border-radius: 999px;
-  color: #dfe7ff;
-  background: rgba(111, 140, 255, 0.14);
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.hero h2 {
-  margin: 14px 0 8px;
-  font-family: 'Exo 2', 'Segoe UI', sans-serif;
-  font-size: clamp(1.9rem, 4.2vw, 3rem);
-  line-height: 1.08;
-}
-
-.hero p {
-  margin: 0;
-  max-width: 64ch;
-  line-height: 1.6;
-  color: var(--text-soft);
-}
-
-.hero-cta {
-  margin-top: 20px;
-  display: inline-block;
-  border-radius: 10px;
-  border: 1px solid rgba(111, 140, 255, 0.35);
-  background: linear-gradient(135deg, var(--brand-blue), #4d66e6);
-  color: #ffffff;
-  padding: 11px 16px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-.hero-cta:hover {
-  filter: brightness(0.95);
-}
-
-.content-grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.content-grid:last-of-type {
-  margin-bottom: 0;
-}
-
-.content-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-}
-
-.content-card h3 {
-  margin: 0;
-  font-family: 'Exo 2', 'Segoe UI', sans-serif;
-  font-size: 1.2rem;
-}
-
-.content-card p {
-  margin: 10px 0 0;
-  color: var(--text-soft);
-  line-height: 1.55;
 }
 
 .site-footer {
@@ -120,24 +31,9 @@
   margin: 0;
 }
 
-@media (max-width: 900px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 640px) {
-  .site-main,
   .site-footer {
     padding-left: 14px;
     padding-right: 14px;
-  }
-
-  .hero {
-    padding: 20px 16px;
-  }
-  .hero-cta {
-    width: 100%;
-    text-align: center;
   }
 }
