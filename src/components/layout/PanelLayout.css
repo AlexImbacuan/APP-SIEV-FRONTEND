@@ -1,0 +1,287 @@
+/* Área privada (módulos) — prefijo "pl-", colores de la marca SIEV */
+.pl {
+  --pl-navy: #1b1f5c;
+  --pl-blue: #2e3488;
+  --pl-orange: #e8601c;
+  --pl-ink: #171a33;
+  --pl-text: #4a4e6a;
+  --pl-muted: #7b7f99;
+  --pl-line: #e4e5ee;
+  --pl-bg: #f5f5f9;
+
+  min-height: 100vh;
+  background: var(--pl-bg);
+  color: var(--pl-text);
+  font-family:
+    'Barlow',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.pl *,
+.pl *::before,
+.pl *::after {
+  box-sizing: border-box;
+}
+
+.pl h1,
+.pl h2 {
+  margin: 0;
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  color: var(--pl-ink);
+  line-height: 1.1;
+}
+
+.pl p {
+  margin: 0;
+}
+
+.pl-container {
+  width: min(1100px, 100% - 40px);
+  margin-inline: auto;
+}
+
+/* ---------- Encabezado ---------- */
+.pl-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid var(--pl-line);
+  box-shadow: 0 8px 24px -18px rgba(27, 31, 92, 0.45);
+}
+
+.pl-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+}
+
+.pl-header__logo {
+  display: block;
+  height: 48px;
+  width: auto;
+}
+
+.pl-header__user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.pl-header__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+}
+
+.pl-header__info strong {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--pl-ink);
+}
+
+.pl-rol {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: rgba(46, 52, 136, 0.1);
+  color: var(--pl-blue);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pl-rol--vacio {
+  background: #fdecea;
+  color: #b42318;
+}
+
+/* ---------- Botones ---------- */
+.pl-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 2px solid var(--pl-orange);
+  border-radius: 10px;
+  background: var(--pl-orange);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.pl-btn:hover {
+  background: #c94e12;
+  border-color: #c94e12;
+}
+
+.pl-btn--outline {
+  background: transparent;
+  color: var(--pl-orange);
+}
+
+.pl-btn--outline:hover {
+  color: #fff;
+}
+
+/* ---------- Contenido ---------- */
+.pl-main {
+  padding: 40px 0 64px;
+}
+
+.pl-titulo {
+  margin-bottom: 28px;
+}
+
+.pl-titulo h1 {
+  font-size: clamp(32px, 4vw, 44px);
+}
+
+.pl-titulo p {
+  margin-top: 4px;
+  color: var(--pl-muted);
+}
+
+.pl-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pl-tarjeta {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  border: 1px solid var(--pl-line);
+  border-top: 4px solid var(--pl-blue);
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+.pl-tarjeta:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--pl-orange);
+  box-shadow: 0 18px 40px -18px rgba(27, 31, 92, 0.35);
+}
+
+.pl-tarjeta h2 {
+  font-size: 26px;
+}
+
+.pl-tarjeta p {
+  flex: 1;
+  margin: 8px 0 16px;
+}
+
+.pl-tarjeta__ir {
+  font-weight: 600;
+  color: var(--pl-orange);
+}
+
+.pl-aviso {
+  padding: 28px;
+  border: 1px solid var(--pl-line);
+  border-left: 5px solid var(--pl-orange);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.pl-aviso--error {
+  border-left-color: #b42318;
+}
+
+.pl-aviso h1 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.pl-aviso p {
+  margin-bottom: 0;
+}
+
+.pl-aviso .pl-btn {
+  margin-top: 20px;
+}
+
+.pl-modulo {
+  padding: 32px;
+  border: 1px solid var(--pl-line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.pl-modulo h1 {
+  font-size: clamp(32px, 4vw, 44px);
+  margin: 12px 0 10px;
+}
+
+.pl-volver {
+  color: var(--pl-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pl-volver:hover {
+  text-decoration: underline;
+}
+
+.pl-cargando {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  color: #7b7f99;
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .pl-header__inner {
+    padding: 10px 0;
+  }
+
+  .pl-header__logo {
+    height: 40px;
+  }
+
+  .pl-header__user {
+    gap: 10px;
+  }
+
+  .pl-header__info strong {
+    max-width: 130px;
+  }
+
+  .pl-btn--outline {
+    padding: 8px 12px;
+  }
+
+  .pl-modulo,
+  .pl-aviso {
+    padding: 22px;
+  }
+}

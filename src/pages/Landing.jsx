@@ -15,10 +15,14 @@ import './Landing.css';
 /**
  * Landing de SIEV.
  * Props:
- *  - onLoginClick (opcional): función que abre su LoginModal existente.
- *    Si se envía, aparece el botón "Ingresar" en el menú.
+ *  - onLoginClick (opcional): abre el modal de inicio de sesión.
+ *    Si se envía, aparece el botón "Iniciar sesión" en el menú.
+ *  - currentUser (opcional): usuario con sesión activa; reemplaza el botón por
+ *    el nombre del usuario y "Cerrar sesión".
+ *  - onLogout (opcional): cierra la sesión.
+ *  - onPanelClick (opcional): lleva al área de módulos ("Mis módulos").
  */
-export default function Landing({ onLoginClick }) {
+export default function Landing({ onLoginClick, currentUser, onLogout, onPanelClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [form, setForm] = useState({
@@ -94,17 +98,49 @@ export default function Landing({ onLoginClick }) {
                 {l.label}
               </a>
             ))}
-            {onLoginClick && (
-              <button
-                type="button"
-                className="lp-nav__login"
-                onClick={() => {
-                  closeMenu();
-                  onLoginClick();
-                }}
-              >
-                Ingresar
-              </button>
+            {currentUser ? (
+              <div className="lp-nav__user">
+                <span className="lp-nav__username" title={currentUser}>
+                  Hola, {currentUser}
+                </span>
+                {onPanelClick && (
+                  <button
+                    type="button"
+                    className="lp-nav__login"
+                    onClick={() => {
+                      closeMenu();
+                      onPanelClick();
+                    }}
+                  >
+                    Mis módulos
+                  </button>
+                )}
+                {onLogout && (
+                  <button
+                    type="button"
+                    className="lp-nav__login"
+                    onClick={() => {
+                      closeMenu();
+                      onLogout();
+                    }}
+                  >
+                    Cerrar sesión
+                  </button>
+                )}
+              </div>
+            ) : (
+              onLoginClick && (
+                <button
+                  type="button"
+                  className="lp-nav__login"
+                  onClick={() => {
+                    closeMenu();
+                    onLoginClick();
+                  }}
+                >
+                  Iniciar sesión
+                </button>
+              )
             )}
             <a href="#contacto" className="lp-btn lp-btn--primary lp-btn--sm" onClick={closeMenu}>
               Cotizar
