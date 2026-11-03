@@ -1,7 +1,59 @@
+/**
+ * Cliente central de la API. Todas las llamadas al backend pasan por aquí.
+ *  - Agrega el header Authorization: Bearer <accessToken>
+ *  - 401 → cierra la sesión y avisa a la app (AuthContext redirige al login)
+ *  - 403 → lanza un error "No tienes permiso" SIN cerrar la sesión
+ *
+ * El backend NO tiene endpoint de refresh: el accessToken dura 15 minutos y al
+ * vencer cualquier petición devuelve 401.
+ */
 const API_BASE_URL = (
   process.env.REACT_APP_API_URL || 'https://app-siev-backend.onrender.com'
 ).replace(/\/$/, '');
-const AUTH_REFRESH = process.env.REACT_APP_AUTH_REFRESH || '/auth/refresh';
+
+const TOKEN_KEY = 'authToken';
+
+export const SESSION_EXPIRED_EVENT = 'auth:session-expired';
+export const MENSAJE_SESION_EXPIRADA = 'Tu sesión expiró, inicia sesión de nuevo';
+export const MENSAJE_SIN_PERMISO = 'No tienes permiso';
+
+/** Error de la API con el código HTTP en `estado` (mismo nombre que usa el backend). */
+export class ApiError extends Error {
+  constructor(message, estado, payload) {
+    super(message);
+    this.name = 'ApiError';
+    this.estado = estado;
+    this.status = estado;
+    this.payload = payload;
+  }
+}
+
+export function getToken() {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch (e) {
+    return null;
+  }
+}
+
+export function setToken(token) {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch (e) {
+    // ignore storage errors
+  }
+}
+
+export function clearToken() {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+    // Claves de versiones anteriores del frontend
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('currentUser');
+  } catch (e) {
+    // ignore
+  }
+}
 
 function buildUrl(path) {
   if (/^https?:\/\//i.test(path)) {
@@ -12,25 +64,33 @@ function buildUrl(path) {
   return `${API_BASE_URL}${normalizedPath}`;
 }
 
-function getAuthToken() {
-  try {
-    return localStorage.getItem('authToken');
-  } catch (e) {
-    return null;
+// El backend responde los errores como { fecha, estado, error, mensaje, ruta }
+function extraerMensaje(payload, estado) {
+  if (payload && typeof payload === 'object') {
+    return payload.mensaje || payload.message || payload.error || `Error ${estado}`;
   }
+  if (typeof payload === 'string' && payload.trim()) return payload;
+  return `Error ${estado}`;
 }
 
+/**
+ * Opciones extra:
+ *  - timeout: ms (por defecto 30000)
+ *  - auth: false para no enviar el header Authorization (login)
+ *  - skipSessionHandling: un 401 NO dispara el cierre de sesión global (se usa
+ *    en el login, donde 401 significa credenciales incorrectas)
+ */
 export async function apiRequest(path, options = {}) {
   const url = buildUrl(path);
 
   const controller = new AbortController();
-  const timeout = options.timeout || 30000; // default 30s
+  const timeout = options.timeout || 30000;
   const timer = setTimeout(() => controller.abort(), timeout);
 
   const headers = Object.assign({}, options.headers || {});
 
-  const token = getAuthToken();
-  if (token) {
+  const token = getToken();
+  if (token && options.auth !== false) {
     headers.Authorization = `Bearer ${token}`;
   }
 
@@ -41,71 +101,48 @@ export async function apiRequest(path, options = {}) {
     headers['Content-Type'] = headers['Content-Type'] || 'application/json';
   }
 
+  let response;
+  let payload;
   try {
-    const response = await fetch(url, {
+    response = await fetch(url, {
       method: options.method || 'GET',
       headers,
       body,
       signal: controller.signal,
       credentials: options.credentials || 'same-origin',
     });
-    clearTimeout(timer);
 
     const contentType = response.headers.get('content-type') || '';
-    const payload = contentType.includes('application/json')
+    payload = contentType.includes('application/json')
       ? await response.json()
       : await response.text();
-
-    if (!response.ok) {
-      // Attempt token refresh on 401 once
-      if (response.status === 401 && !options._retry) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        if (refreshToken) {
-          try {
-            const refreshRes = await fetch(buildUrl(AUTH_REFRESH), {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ refreshToken }),
-            });
-
-            if (refreshRes.ok) {
-              const refreshPayload = await refreshRes.json();
-              // expect { accessToken, refreshToken, usuario? }
-              if (refreshPayload?.accessToken) {
-                try {
-                  localStorage.setItem('authToken', refreshPayload.accessToken);
-                  if (refreshPayload.refreshToken)
-                    localStorage.setItem('refreshToken', refreshPayload.refreshToken);
-                  if (refreshPayload.usuario)
-                    localStorage.setItem('currentUser', refreshPayload.usuario);
-                } catch (e) {
-                  // ignore
-                }
-
-                // retry original request with new token
-                const newOptions = Object.assign({}, options, { _retry: true });
-                return apiRequest(path, newOptions);
-              }
-            }
-          } catch (e) {
-            // refresh failed, fall through to throw original error
-          }
-        }
-      }
-
-      const message =
-        typeof payload === 'string' ? payload : payload?.message || `HTTP ${response.status}`;
-      const err = new Error(message);
-      err.status = response.status;
-      err.payload = payload;
-      throw err;
-    }
-
-    return payload;
   } catch (error) {
     if (error.name === 'AbortError') {
-      throw new Error('Request timed out');
+      throw new ApiError('El servidor tardó demasiado en responder. Intenta de nuevo.', 0);
     }
-    throw error;
+    // fetch lanza TypeError si no hay conexión, el servidor está caído o CORS lo bloquea
+    throw new ApiError('No se pudo conectar con el servidor.', 0);
+  } finally {
+    clearTimeout(timer);
   }
+
+  if (response.ok) {
+    return payload;
+  }
+
+  const estado = response.status;
+
+  if (estado === 401 && !options.skipSessionHandling) {
+    clearToken();
+    window.dispatchEvent(
+      new CustomEvent(SESSION_EXPIRED_EVENT, { detail: { mensaje: MENSAJE_SESION_EXPIRADA } }),
+    );
+    throw new ApiError(MENSAJE_SESION_EXPIRADA, 401, payload);
+  }
+
+  if (estado === 403) {
+    throw new ApiError(MENSAJE_SIN_PERMISO, 403, payload);
+  }
+
+  throw new ApiError(extraerMensaje(payload, estado), estado, payload);
 }
