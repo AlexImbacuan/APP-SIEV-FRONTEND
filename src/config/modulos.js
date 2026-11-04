@@ -1,7 +1,11 @@
 /**
- * ÚNICO lugar donde se define qué módulos existen y qué rol ve cada uno.
- * Para cambiar quién ve un módulo, edite su arreglo `roles`.
+ * ÚNICO lugar donde se define qué módulos existen y quién ve cada uno.
+ * Cada módulo se muestra según UNA de estas dos reglas:
+ *  - `permiso`: el usuario debe tener ese permiso en `usuario.permisos`
+ *    (lo que devuelve /api/auth/me). Es la forma recomendada.
+ *  - `roles`:   el `usuario.rol` debe estar en la lista.
  * Para agregar un módulo, agregue un objeto a MODULOS (la ruta se crea sola).
+ * Si el módulo tiene una pantalla propia, regístrela en pages/modulos/ModuloPage.jsx.
  *
  * Ojo: ocultar un módulo aquí es solo para la interfaz. La seguridad real la
  * hace el backend, que valida rol y permisos en cada petición.
@@ -11,6 +15,12 @@ export const ROLES = {
   SUPERADMIN: 'SUPERADMIN',
   SUPERVISOR: 'SUPERVISOR',
   TECNICO: 'TECNICO',
+};
+
+// Permisos del backend que usa el frontend para mostrar u ocultar pantallas
+export const PERMISOS = {
+  USUARIOS_GESTIONAR: 'usuarios:gestionar',
+  ROLES_GESTIONAR: 'roles:gestionar',
 };
 
 // Nombre legible de cada rol para mostrar en pantalla
@@ -58,16 +68,33 @@ export const MODULOS = [
     ruta: '/modulos/comun',
     roles: [SUPERVISOR, TECNICO],
   },
+  {
+    id: 'usuarios',
+    titulo: 'Usuarios',
+    descripcion: 'Crear usuarios, asignar roles y activar o desactivar cuentas.',
+    ruta: '/modulos/usuarios',
+    permiso: PERMISOS.USUARIOS_GESTIONAR,
+  },
 ];
 
-/** true si el rol puede ver el módulo. Un rol null no ve ninguno. */
-export function puedeVer(modulo, rol) {
-  return Boolean(rol) && modulo.roles.includes(rol);
+/** true si el usuario tiene el permiso (según /api/auth/me). */
+export function tienePermiso(usuario, permiso) {
+  return Boolean(usuario?.permisos?.includes(permiso));
 }
 
-/** Módulos que puede ver un rol, en el orden definido arriba. */
-export function modulosVisibles(rol) {
-  return MODULOS.filter((modulo) => puedeVer(modulo, rol));
+/**
+ * true si el usuario puede ver el módulo: por `permiso` si el módulo lo
+ * define, o si no por `roles`. Sin usuario, o con rol null, no ve nada por rol.
+ */
+export function puedeVer(modulo, usuario) {
+  if (!usuario) return false;
+  if (modulo.permiso) return tienePermiso(usuario, modulo.permiso);
+  return Boolean(usuario.rol) && Boolean(modulo.roles?.includes(usuario.rol));
+}
+
+/** Módulos que puede ver el usuario, en el orden definido arriba. */
+export function modulosVisibles(usuario) {
+  return MODULOS.filter((modulo) => puedeVer(modulo, usuario));
 }
 
 export function buscarModulo(id) {
