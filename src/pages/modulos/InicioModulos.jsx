@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { modulosVisibles } from '../../config/modulos';
 
-/** Pantalla de inicio después del login: solo los módulos que el rol puede ver. */
+/** Pantalla de inicio después del login: solo los módulos que el usuario puede ver. */
 export default function InicioModulos() {
   const { usuario } = useAuth();
-  const modulos = modulosVisibles(usuario.rol);
+  const modulos = modulosVisibles(usuario);
   const primerNombre = (usuario.nombre || '').split(' ')[0];
 
   return (

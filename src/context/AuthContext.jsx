@@ -8,11 +8,12 @@ const AuthContext = createContext(null);
 /**
  * Sesión del usuario: { id, nombre, email, activo, rol, permisos } tal como lo
  * devuelve GET /api/auth/me. El usuario vive solo en memoria; en localStorage
- * se guarda únicamente el token, y el usuario se vuelve a pedir al recargar.
+ * se guardan únicamente los tokens, y el usuario se vuelve a pedir al recargar.
+ * Menús y pantallas se deciden por `usuario.permisos` (ver config/modulos.js).
  */
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
-  // Si hay token al cargar, se está recuperando la sesión hasta que /me responda
+  // Si hay tokens al cargar, se está recuperando la sesión hasta que /me responda
   const [cargando, setCargando] = useState(() => authService.isAuthenticated());
   const [mensajeSesion, setMensajeSesion] = useState('');
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ export function AuthProvider({ children }) {
       .catch((error) => {
         if (!activo) return;
         if (error.estado === 401) {
-          // Token vencido o usuario desactivado: se cierra la sesión
-          authService.logout();
+          // Ni el token ni el refresh sirven (o el usuario fue desactivado):
+          // apiClient ya borró los tokens
           setMensajeSesion(MENSAJE_SESION_EXPIRADA);
         }
         setUsuario(null);
@@ -45,7 +46,7 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
-  // Cualquier petición que reciba 401 cierra la sesión y lleva al login
+  // Si una petición recibe 401 y el refresh también falla: sesión cerrada, al login
   useEffect(() => {
     const onSesionExpirada = (event) => {
       setUsuario(null);
@@ -70,16 +71,17 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  /** Cierra la sesión en el backend (si falla, igual se cierra aquí) y va al login. */
   const logout = useCallback(() => {
     authService.logout();
     setUsuario(null);
     setMensajeSesion('');
-    navigate('/', { replace: true });
+    navigate('/login', { replace: true });
   }, [navigate]);
 
   /**
    * Vuelve a pedir /me para reflejar cambios de rol o permisos hechos por un
-   * administrador. Un 401 cierra la sesión (lo maneja apiClient).
+   * administrador. Si el token venció se renueva solo (lo maneja apiClient).
    */
   const recargarUsuario = useCallback(async () => {
     try {

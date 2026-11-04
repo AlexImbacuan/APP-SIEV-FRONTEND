@@ -107,6 +107,46 @@
   color: #b42318;
 }
 
+/* ---------- Menú de módulos ---------- */
+.pl-menu {
+  border-top: 1px solid var(--pl-line);
+}
+
+.pl-menu__inner {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pl-menu__link {
+  position: relative;
+  padding: 12px 14px;
+  color: var(--pl-text);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pl-menu__link:hover {
+  color: var(--pl-ink);
+}
+
+.pl-menu__link.active {
+  color: var(--pl-blue);
+}
+
+.pl-menu__link.active::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--pl-orange);
+}
+
 /* ---------- Botones ---------- */
 .pl-btn {
   display: inline-block;

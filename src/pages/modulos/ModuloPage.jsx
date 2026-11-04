@@ -2,10 +2,16 @@ import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import RutaProtegida from '../../components/auth/RutaProtegida';
 import { buscarModulo } from '../../config/modulos';
+import UsuariosPage from '../usuarios/UsuariosPage';
+
+// Módulos que ya tienen pantalla propia. Los demás muestran el contenido pendiente.
+const PANTALLAS = {
+  usuarios: UsuariosPage,
+};
 
 /**
  * Página genérica de módulo. Lee el :id de la URL, busca el módulo en
- * config/modulos.js y lo protege con sus roles. Sirve para todos los módulos.
+ * config/modulos.js y lo protege con su permiso o sus roles.
  */
 export default function ModuloPage() {
   const { id } = useParams();
@@ -15,17 +21,24 @@ export default function ModuloPage() {
     return <Navigate to="/modulos" replace />;
   }
 
+  const Pantalla = PANTALLAS[modulo.id];
+  const visiblePara = modulo.permiso ? `permiso ${modulo.permiso}` : modulo.roles.join(', ');
+
   return (
-    <RutaProtegida roles={modulo.roles}>
-      <section className="pl-modulo">
-        <Link to="/modulos" className="pl-volver">
-          ← Volver al inicio
-        </Link>
-        <h1>{modulo.titulo}</h1>
-        <p>
-          Módulo de {modulo.titulo} — visible para: {modulo.roles.join(', ')}. (Contenido pendiente)
-        </p>
-      </section>
+    <RutaProtegida roles={modulo.roles} permiso={modulo.permiso}>
+      {Pantalla ? (
+        <Pantalla modulo={modulo} />
+      ) : (
+        <section className="pl-modulo">
+          <Link to="/modulos" className="pl-volver">
+            ← Volver al inicio
+          </Link>
+          <h1>{modulo.titulo}</h1>
+          <p>
+            Módulo de {modulo.titulo} — visible para: {visiblePara}. (Contenido pendiente)
+          </p>
+        </section>
+      )}
     </RutaProtegida>
   );
 }
