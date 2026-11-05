@@ -2,7 +2,7 @@
    Landing SIEV — todas las clases usan el prefijo "lp-"
    para no chocar con los estilos existentes del proyecto.
    ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap');
+/* Las fuentes (Barlow) se cargan desde public/index.html para no bloquear la página */
 
 .lp {
   --lp-navy: #1b1f5c;
@@ -13,7 +13,7 @@
   --lp-terracotta: #c0503a;
   --lp-ink: #171a33;
   --lp-text: #4a4e6a;
-  --lp-muted: #7b7f99;
+  --lp-muted: #5f6380; /* contraste mínimo 4.5:1 sobre blanco y gris claro */
   --lp-line: #e4e5ee;
   --lp-bg: #ffffff;
   --lp-bg-soft: #f5f5f9;
@@ -135,14 +135,15 @@ html {
   transform: translateY(-2px);
 }
 
+/* Naranja oscuro: el texto blanco necesita contraste 4.5:1 para leerse bien */
 .lp-btn--primary {
-  background: var(--lp-orange);
+  background: var(--lp-orange-dark);
   color: #fff !important;
   box-shadow: 0 10px 24px -10px rgba(232, 96, 28, 0.8);
 }
 
 .lp-btn--primary:hover {
-  background: var(--lp-orange-dark);
+  background: #ad420e;
 }
 
 .lp .lp-btn--ghost {
@@ -471,7 +472,7 @@ html {
   }
 }
 
-/* ---------- Clientes ---------- */
+/* ---------- Clientes (carrusel infinito) ---------- */
 .lp-clients {
   border-bottom: 1px solid var(--lp-line);
   background: #fff;
@@ -494,35 +495,64 @@ html {
   line-height: 1.3;
 }
 
-.lp-clients ul {
+/* Ventana del carrusel: los bordes se desvanecen para que los logos entren y salgan suave */
+.lp-clients__carrusel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* Dos copias iguales seguidas: al mover -50% la segunda queda donde empezó la primera */
+.lp-clients__pista {
+  display: flex;
+  width: max-content;
+  animation: lp-carrusel var(--duracion, 30s) linear infinite;
+}
+
+.lp-clients__carrusel:hover .lp-clients__pista {
+  animation-play-state: paused;
+}
+
+@keyframes lp-carrusel {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.lp-clients__lista {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  gap: 14px 32px;
-  flex: 1;
 }
 
-.lp-clients li {
+.lp-clients__lista li {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 36px;
   font-family: var(--lp-head);
   font-weight: 700;
   font-size: 22px;
   color: #a2a5bd;
   text-transform: uppercase;
   letter-spacing: 0.8px;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
-.lp-clients li:hover {
+.lp-clients__lista li:hover {
   color: var(--lp-blue);
 }
 
 .lp-clients img {
   display: block;
-  height: 56px;
+  height: calc(46px * var(--escala, 1));
   width: auto;
   max-width: 150px;
   object-fit: contain;
@@ -533,9 +563,31 @@ html {
     opacity 0.25s;
 }
 
-.lp-clients li:hover img {
+.lp-clients__lista li:hover img {
   filter: none;
   opacity: 1;
+}
+
+/* Quien prefiere menos movimiento ve los logos quietos, en una fila que se ajusta */
+@media (prefers-reduced-motion: reduce) {
+  .lp-clients__pista {
+    animation: none;
+    width: auto;
+  }
+
+  .lp-clients__carrusel {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .lp-clients__lista {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lp-clients__repetido {
+    display: none !important;
+  }
 }
 
 /* ---------- Secciones ---------- */
@@ -950,7 +1002,7 @@ html {
   margin-bottom: 18px;
 }
 
-.lp-footer h4 {
+.lp-footer h3 {
   color: var(--lp-navy);
   font-size: 18px;
   text-transform: uppercase;
@@ -1106,14 +1158,25 @@ html {
     max-width: none;
   }
 
-  .lp-clients ul {
-    justify-content: flex-start;
-    gap: 18px 28px;
+  .lp-clients__label {
+    align-self: center;
   }
 
+  .lp-clients__carrusel {
+    width: 100%;
+  }
+
+  /* En celular no hay mouse: los logos se ven a color */
   .lp-clients img {
-    height: 44px;
+    height: calc(40px * var(--escala, 1));
     max-width: 120px;
+    filter: none;
+    opacity: 1;
+  }
+
+  .lp-clients__lista li {
+    height: 56px;
+    padding: 0 24px;
   }
 
   .lp-cta__inner {
@@ -1131,12 +1194,22 @@ html {
     padding: 64px 0 88px;
   }
 
-  .lp-hero__card {
-    left: -8px;
+  /* En celular las tarjetas no flotan sobre las fotos: van debajo del collage */
+  .lp-hero__visual {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
+  .lp-hero__collage {
+    margin-bottom: 26px;
+  }
+
+  .lp-hero__card,
   .lp-hero__card--alt {
-    right: -8px;
+    position: static;
+    animation: none;
+    padding: 12px 16px;
   }
 
   .lp-section {

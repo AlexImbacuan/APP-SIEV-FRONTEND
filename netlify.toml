@@ -6,3 +6,17 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# ===== Caché del navegador =====
+# Archivos del build con huella en el nombre (main.abc123.js): nunca cambian, caché de 1 año.
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Imágenes: 30 días. Si se reemplaza una imagen con el mismo nombre,
+# algunos visitantes la verán actualizada cuando venza la caché (o cambie el nombre).
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"

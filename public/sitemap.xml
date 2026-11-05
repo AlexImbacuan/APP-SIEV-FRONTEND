@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Páginas públicas del sitio. Agregue aquí cada nueva página pública. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sievsas.com/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-tecnico.jpg</image:loc></image:image>
+    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-altura.jpg</image:loc></image:image>
+    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-tablero.jpg</image:loc></image:image>
+  </url>
+</urlset>

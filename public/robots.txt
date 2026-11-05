@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+# Zona privada (requiere iniciar sesión): no tiene sentido indexarla
+Disallow: /modulos
+Disallow: /login
+
+Sitemap: https://sievsas.com/sitemap.xml

@@ -13,6 +13,55 @@ import {
 } from '../data/landingContent';
 import './Landing.css';
 
+// Mínimo de logos por vuelta para que la fila cubra todo el ancho sin dejar huecos
+const MINIMO_LOGOS_POR_VUELTA = 8;
+
+/**
+ * Carrusel infinito de logos de clientes. La lista se repite hasta llenar el ancho y
+ * se duplica para que el desplazamiento no tenga cortes. Solo la primera copia es
+ * visible para lectores de pantalla. Para agregar clientes basta con editar `clients`
+ * en landingContent.js.
+ */
+function CarruselClientes({ clientes }) {
+  const repeticiones = Math.max(1, Math.ceil(MINIMO_LOGOS_POR_VUELTA / clientes.length));
+  const vuelta = Array.from({ length: repeticiones }, () => clientes).flat();
+
+  const lista = (copia) => (
+    <ul className="lp-clients__lista" aria-hidden={copia > 0 ? true : undefined}>
+      {vuelta.map((c, i) => {
+        // Solo la primera aparición de cada cliente se anuncia; las repeticiones son decorativas
+        const decorativo = copia > 0 || i >= clientes.length;
+        return (
+          <li key={`${c.nombre}-${i}`} className={decorativo ? 'lp-clients__repetido' : undefined}>
+            {c.logo ? (
+              <img
+                src={c.logo}
+                alt={decorativo ? '' : c.nombre}
+                title={c.nombre}
+                width={c.ancho}
+                height={c.alto}
+                loading="lazy"
+                style={c.escala ? { '--escala': c.escala } : undefined}
+              />
+            ) : (
+              <span aria-hidden={decorativo ? true : undefined}>{c.nombre}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+
+  return (
+    <div className="lp-clients__carrusel">
+      <div className="lp-clients__pista" style={{ '--duracion': `${vuelta.length * 3.5}s` }}>
+        {lista(0)}
+        {lista(1)}
+      </div>
+    </div>
+  );
+}
+
 /**
  * Landing de SIEV.
  * Props:
@@ -90,7 +139,15 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
       <header className={`lp-nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="lp-container lp-nav__inner">
           <a href="#inicio" className="lp-nav__brand" onClick={closeMenu}>
-            <img src={logo.src} alt={logo.alt} className="lp-nav__logo" />
+            <img
+              src={logo.src}
+              srcSet={logo.srcSet}
+              sizes="96px"
+              width={logo.ancho}
+              height={logo.alto}
+              alt={logo.alt}
+              className="lp-nav__logo"
+            />
           </a>
 
           <nav className={`lp-nav__links ${menuOpen ? 'is-open' : ''}`} aria-label="Principal">
@@ -169,7 +226,7 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
           </svg>
 
           <div className="lp-container lp-hero__inner">
-            <div className="lp-hero__copy" data-reveal>
+            <div className="lp-hero__copy">
               <span className="lp-eyebrow lp-eyebrow--light">
                 <span className="lp-dot" /> Ingeniería eléctrica · Valle del Cauca
               </span>
@@ -180,7 +237,8 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
               </h1>
               <p className="lp-hero__lead">
                 Montajes eléctricos, tableros, automatización y mantenimiento para la industria, el
-                comercio y el hogar. Un equipo unido y responsable que cumple lo que cotiza.
+                comercio y el hogar en Cali, Palmira, Candelaria y todo el Valle del Cauca. Un
+                equipo unido y responsable que cumple lo que cotiza.
               </p>
               <div className="lp-hero__actions">
                 <a href="#contacto" className="lp-btn lp-btn--primary">
@@ -199,12 +257,20 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
               </ul>
             </div>
 
-            <div className="lp-hero__visual" data-reveal>
+            <div className="lp-hero__visual">
               <div className="lp-hero__collage">
                 {heroFotos.map((f, i) => (
                   <img
                     key={f.src}
                     src={f.src}
+                    srcSet={f.srcSet}
+                    sizes={
+                      i === 0
+                        ? '(max-width: 600px) 55vw, (max-width: 1024px) 250px, 300px'
+                        : '(max-width: 600px) 42vw, (max-width: 1024px) 200px, 240px'
+                    }
+                    width={f.ancho}
+                    height={f.alto}
                     alt={f.alt}
                     className={i === 0 ? 'lp-hero__foto lp-hero__foto--principal' : 'lp-hero__foto'}
                     fetchPriority={i === 0 ? 'high' : undefined}
@@ -233,17 +299,7 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
         <section className="lp-clients" aria-label="Clientes">
           <div className="lp-container lp-clients__inner">
             <span className="lp-clients__label">Empresas que confían en nosotros</span>
-            <ul>
-              {clients.map((c) => (
-                <li key={c.nombre}>
-                  {c.logo ? (
-                    <img src={c.logo} alt={c.nombre} title={c.nombre} loading="lazy" />
-                  ) : (
-                    c.nombre
-                  )}
-                </li>
-              ))}
-            </ul>
+            <CarruselClientes clientes={clients} />
           </div>
         </section>
 
@@ -283,7 +339,16 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
         <section className="lp-section lp-about" id="nosotros">
           <div className="lp-container lp-about__inner">
             <div className="lp-about__brand" data-reveal>
-              <img src={logo.src} alt={logo.alt} className="lp-about__logo" />
+              <img
+                src={logo.src}
+                srcSet={logo.srcSet}
+                sizes="(max-width: 1024px) 85vw, 440px"
+                width={logo.ancho}
+                height={logo.alto}
+                alt={logo.alt}
+                className="lp-about__logo"
+                loading="lazy"
+              />
             </div>
             <div className="lp-about__copy" data-reveal>
               <span className="lp-eyebrow">Nosotros</span>
@@ -292,7 +357,8 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
                 En <strong>{company.name}</strong> acompañamos a plantas de producción, empresas y
                 hogares con soluciones eléctricas completas: diseñamos, suministramos, instalamos y
                 mantenemos. Trabajamos de la mano del área de mantenimiento de cada cliente para que
-                la operación nunca se detenga.
+                la operación nunca se detenga, con base en Candelaria y atención en Cali, Palmira,
+                Yumbo, Jamundí y todo el Valle del Cauca.
               </p>
               <div className="lp-values">
                 {values.map((v) => (
@@ -354,7 +420,10 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
             <div className="lp-contact__info" data-reveal>
               <span className="lp-eyebrow">Contacto</span>
               <h2>Solicite su cotización</h2>
-              <p>Cuéntenos qué necesita y le respondemos con una propuesta a la medida.</p>
+              <p>
+                Cuéntenos qué necesita y le respondemos con una propuesta a la medida. Atendemos en
+                todo el Valle del Cauca, con horarios ajustados a cada trabajo.
+              </p>
               <ul className="lp-contact__list">
                 <li>
                   <Icon name="telefono" />
@@ -437,11 +506,20 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
       <footer className="lp-footer">
         <div className="lp-container lp-footer__inner">
           <div className="lp-footer__brand">
-            <img src={logo.src} alt={logo.alt} className="lp-footer__logo" />
+            <img
+              src={logo.src}
+              srcSet={logo.srcSet}
+              sizes="240px"
+              width={logo.ancho}
+              height={logo.alto}
+              alt={logo.alt}
+              className="lp-footer__logo"
+              loading="lazy"
+            />
             <p>NIT {company.nit}</p>
           </div>
           <div>
-            <h4>Navegación</h4>
+            <h3>Navegación</h3>
             {navLinks.map((l) => (
               <a key={l.href} href={l.href}>
                 {l.label}
@@ -449,7 +527,7 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
             ))}
           </div>
           <div>
-            <h4>Contacto</h4>
+            <h3>Contacto</h3>
             <span>Tel. {company.landline}</span>
             {company.phones.map((p) => (
               <span key={p}>Cel. {p}</span>
