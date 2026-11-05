@@ -1,0 +1,593 @@
+/* Módulo de Cotizaciones — prefijo "ct-". Reutiliza los estilos "us-" de Usuarios,
+   "md-" del modal y las variables "pl-" del panel. */
+
+.ct-mt {
+  margin-top: 16px;
+}
+
+.ct-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ct-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ct-eyebrow {
+  margin: 0 0 2px;
+  color: var(--pl-orange) !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ct-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.ct-subtitulo {
+  margin: 26px 0 10px !important;
+  font-size: 24px;
+}
+
+.ct-panel {
+  margin: 0 0 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--pl-line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* ---------- Estado ---------- */
+.ct-estado {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.ct-estado--pendiente {
+  background: #fff4e5;
+  color: #a15c00;
+}
+
+.ct-estado--aprobada {
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.ct-estado--no-aprobada {
+  background: #fdecea;
+  color: #b42318;
+}
+
+.ct-factura {
+  font-weight: 600;
+  color: #067647;
+}
+
+.ct-sin-factura {
+  color: var(--pl-muted);
+}
+
+/* ---------- Filtros ---------- */
+.ct-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.ct-filtro {
+  padding: 10px 12px;
+  border: 1.5px solid var(--pl-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 15px;
+}
+
+.ct-filtro:focus {
+  outline: none;
+  border-color: var(--pl-blue);
+  box-shadow: 0 0 0 3px rgba(46, 52, 136, 0.15);
+}
+
+.ct-filtro--texto {
+  flex: 1 1 260px;
+  font-size: 16px;
+}
+
+.ct-limpiar {
+  border: none;
+  background: none;
+  color: var(--pl-blue);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ct-limpiar:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Tabla de la lista ---------- */
+.ct-fila {
+  cursor: pointer;
+}
+
+.ct-fila:focus-visible {
+  outline: 2px solid var(--pl-blue);
+  outline-offset: -2px;
+}
+
+.ct-tabla td,
+.ct-tabla th {
+  white-space: nowrap;
+}
+
+.ct-tabla td:nth-child(2) {
+  white-space: normal;
+  min-width: 180px;
+}
+
+.ct-tabla--cargando {
+  opacity: 0.55;
+  transition: opacity 0.2s;
+}
+
+.ct-paginacion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--pl-muted);
+}
+
+/* ---------- Subir PDF ---------- */
+.ct-dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 32px 16px;
+  border: 2px dashed #c9cbe0;
+  border-radius: 14px;
+  background: var(--pl-bg);
+  color: var(--pl-muted);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.ct-dropzone strong {
+  color: var(--pl-blue);
+  font-size: 17px;
+}
+
+.ct-dropzone:hover,
+.ct-dropzone--activa,
+.ct-dropzone:focus-within {
+  border-color: var(--pl-orange);
+  background: #fff7f2;
+}
+
+.ct-dropzone--leyendo {
+  cursor: progress;
+  color: var(--pl-blue);
+  font-weight: 600;
+}
+
+/* El input queda invisible pero accesible con el teclado */
+.ct-dropzone__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.ct-info-pdf {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(46, 52, 136, 0.08);
+  color: var(--pl-navy);
+  font-size: 15px;
+}
+
+.ct-existente {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border: 1px solid #f5c2bd;
+  border-radius: 10px;
+  background: #fdecea;
+  color: #7a1a12;
+}
+
+/* ---------- Avisos (advertencias, no errores) ---------- */
+.ct-avisos {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid #f3d27a;
+  border-left: 5px solid #e3a008;
+  border-radius: 10px;
+  background: #fffbea;
+  color: #6b4e00;
+  font-size: 15px;
+}
+
+.ct-avisos ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.ct-motivo {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-left: 5px solid #b42318;
+  border-radius: 10px;
+  background: #fdecea;
+  color: #7a1a12;
+}
+
+/* ---------- Detalle ---------- */
+.ct-acciones-estado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.ct-acciones-estado > span {
+  font-weight: 600;
+  color: var(--pl-ink);
+}
+
+.ct-btn-estado {
+  padding: 8px 14px;
+  border: 1.5px solid currentColor;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ct-btn-estado:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ct-btn-estado--aprobada {
+  color: #067647;
+}
+
+.ct-btn-estado--aprobada:hover:not(:disabled) {
+  background: #ecfdf3;
+}
+
+.ct-btn-estado--no-aprobada {
+  color: #b42318;
+}
+
+.ct-btn-estado--no-aprobada:hover:not(:disabled) {
+  background: #fdecea;
+}
+
+.ct-btn-estado--pendiente {
+  color: #a15c00;
+}
+
+.ct-btn-estado--pendiente:hover:not(:disabled) {
+  background: #fff4e5;
+}
+
+.pl-btn.ct-btn-peligro {
+  border-color: #b42318;
+  color: #b42318;
+}
+
+.pl-btn.ct-btn-peligro:hover:not(:disabled) {
+  background: #b42318;
+  color: #fff;
+}
+
+.ct-datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px 24px;
+  margin: 0;
+}
+
+.ct-datos dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pl-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ct-datos dd {
+  margin: 2px 0 0;
+  color: var(--pl-ink);
+}
+
+.ct-notas {
+  white-space: pre-wrap;
+}
+
+.ct-totales {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(360px, 100%);
+  margin: 16px 0 0 auto;
+}
+
+.ct-totales > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ct-totales strong {
+  color: var(--pl-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ct-totales__total {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 2px solid var(--pl-line);
+  font-size: 19px;
+}
+
+.ct-totales__total strong {
+  color: var(--pl-blue);
+}
+
+/* ---------- Formulario ---------- */
+.ct-form fieldset {
+  min-width: 0;
+}
+
+.ct-form legend {
+  padding: 0 6px;
+  margin-left: -6px;
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--pl-ink);
+}
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px 18px;
+  margin-bottom: 14px;
+}
+
+.ct-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--pl-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.ct-textarea:focus {
+  outline: none;
+  border-color: var(--pl-blue);
+  box-shadow: 0 0 0 3px rgba(46, 52, 136, 0.15);
+}
+
+.ct-textarea[aria-invalid='true'] {
+  border-color: #b42318;
+}
+
+.ct-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ct-items__cabecera,
+.ct-item {
+  display: grid;
+  grid-template-columns:
+    minmax(200px, 3fr) minmax(90px, 1fr) minmax(130px, 1.3fr) minmax(130px, 1.3fr)
+    36px;
+  gap: 10px;
+  align-items: start;
+}
+
+.ct-items__cabecera {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pl-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ct-items__vacio {
+  color: var(--pl-muted);
+}
+
+/* La etiqueta de cada campo solo se ve en móvil; en escritorio la da la cabecera */
+.ct-item__etiqueta {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.ct-item__bruto {
+  padding: 10px 0;
+  text-align: right;
+  font-weight: 600;
+  color: var(--pl-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ct-quitar {
+  width: 36px;
+  height: 42px;
+  border: 1.5px solid var(--pl-line);
+  border-radius: 10px;
+  background: #fff;
+  color: #b42318;
+  cursor: pointer;
+}
+
+.ct-quitar:hover:not(:disabled) {
+  border-color: #b42318;
+}
+
+.ct-ayuda-numeros {
+  margin-top: 10px !important;
+}
+
+.ct-totales--form {
+  margin-top: 0;
+}
+
+.ct-iva {
+  flex-wrap: wrap;
+}
+
+.ct-iva label {
+  color: var(--pl-text);
+}
+
+.ct-iva__control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ct-iva__control input {
+  width: 150px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--pl-line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.ct-iva__control input:focus {
+  outline: none;
+  border-color: var(--pl-blue);
+}
+
+.ct-iva__control input[aria-invalid='true'] {
+  border-color: #b42318;
+}
+
+.ct-acciones-form {
+  margin: 8px 0 0;
+}
+
+.ct-form > .md-error {
+  margin-bottom: 12px;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 860px) {
+  .ct-items__cabecera {
+    display: none;
+  }
+
+  .ct-item {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px;
+    border: 1px solid var(--pl-line);
+    border-radius: 12px;
+    background: var(--pl-bg);
+  }
+
+  .ct-item > .md-campo:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .ct-item__etiqueta {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+    font-size: 13px;
+  }
+
+  .ct-item__bruto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    text-align: left;
+  }
+
+  .ct-quitar {
+    justify-self: end;
+    align-self: end;
+    width: auto;
+    padding: 0 14px;
+  }
+
+  .ct-quitar::after {
+    content: ' Quitar';
+  }
+
+  .ct-tabla td,
+  .ct-tabla th {
+    white-space: normal;
+  }
+
+  .ct-tabla td.ct-num {
+    text-align: right;
+  }
+}
+
+@media (max-width: 480px) {
+  .ct-filtro {
+    flex: 1 1 100%;
+  }
+
+  .ct-botones,
+  .ct-botones .pl-btn {
+    width: 100%;
+  }
+}

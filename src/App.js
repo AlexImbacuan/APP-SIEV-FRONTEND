@@ -39,7 +39,8 @@ function App() {
         }
       >
         <Route index element={<InicioModulos />} />
-        <Route path=":id" element={<ModuloPage />} />
+        {/* "/*" permite que un módulo tenga sus propias subrutas (p. ej. cotizaciones/12) */}
+        <Route path=":id/*" element={<ModuloPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
