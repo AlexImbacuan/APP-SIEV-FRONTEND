@@ -24,21 +24,27 @@ export const navLinks = [
   { href: '#contacto', label: 'Contacto' },
 ];
 
-// Fotos reales del collage del hero (public/images/Trabajos, optimizadas para web).
+// Fotos reales del collage del hero (public/images/Trabajos).
+// Cada foto tiene dos tamaños en WebP (-400 y -700): el navegador baja el que necesita.
 // La primera es la grande; las otras dos van a la derecha.
+// ancho/alto: tamaño real de la versión -700 (evita saltos mientras carga).
+const fotoHero = (nombre, alt, ancho, alto) => ({
+  src: `/images/Trabajos/${nombre}-700.webp`,
+  srcSet: `/images/Trabajos/${nombre}-400.webp 400w, /images/Trabajos/${nombre}-700.webp 700w`,
+  alt,
+  ancho,
+  alto,
+});
+
 export const heroFotos = [
-  {
-    src: '/images/Trabajos/hero-tecnico.jpg',
-    alt: 'Técnico de SIEV cableando un tablero de control',
-  },
-  {
-    src: '/images/Trabajos/hero-altura.jpg',
-    alt: 'Equipo de SIEV trabajando en altura desde un brazo articulado',
-  },
-  {
-    src: '/images/Trabajos/hero-tablero.jpg',
-    alt: 'Tablero de automatización con variadores instalado por SIEV',
-  },
+  fotoHero('hero-tecnico', 'Técnico de SIEV cableando un tablero de control', 700, 933),
+  fotoHero(
+    'hero-altura',
+    'Equipo de SIEV trabajando en altura desde un brazo articulado',
+    700,
+    525,
+  ),
+  fotoHero('hero-tablero', 'Tablero de automatización con variadores instalado por SIEV', 700, 933),
 ];
 
 export const heroBadges = [
@@ -144,16 +150,30 @@ export const steps = [
 ];
 
 // Única imagen de la landing: el logo de /public/images (se muestra en la portada).
+// Logo en WebP liviano y en 3 anchos. El original (logo-SIEV.png, 650 KB) solo lo usa
+// index.html para Google.
 export const logo = {
-  src: '/images/logo-SIEV.png',
+  src: '/images/logo-SIEV-480.webp',
+  srcSet:
+    '/images/logo-SIEV-240.webp 240w, /images/logo-SIEV-480.webp 480w, /images/logo-SIEV-960.webp 960w',
+  ancho: 960,
+  alto: 543,
   alt: 'SIEV - Soluciones Integrales Eléctricas del Valle S.A.S.',
 };
 
 // Logos en public/images/clientes (PNG con fondo transparente).
+// Se muestran en un carrusel infinito: agregue o quite clientes aquí.
 // Un cliente sin "logo" se muestra con su nombre en texto.
+// "escala" (opcional) agranda un logo que se ve pequeño por su forma (p. ej. 1.4).
+// ancho/alto: tamaño real del archivo (evita saltos mientras carga).
 export const clients = [
-  { nombre: 'Cargill', logo: '/images/clientes/cargill.png' },
-  { nombre: 'Avícola Pollo Listo', logo: '/images/clientes/pollo-listo.png' },
-  { nombre: 'Agrograin', logo: '/images/clientes/agrograin.png' },
-  { nombre: 'Savicol', logo: '/images/clientes/savicol.png' },
+  { nombre: 'Cargill', logo: '/images/clientes/cargill.webp', ancho: 274, alto: 128 },
+  {
+    nombre: 'Avícola Pollo Listo',
+    logo: '/images/clientes/pollo-listo.webp',
+    ancho: 187,
+    alto: 128,
+  },
+  { nombre: 'Agrograin', logo: '/images/clientes/agrograin.webp', ancho: 249, alto: 128 },
+  { nombre: 'Savicol', logo: '/images/clientes/savicol.webp', ancho: 116, alto: 180, escala: 1.4 },
 ];
