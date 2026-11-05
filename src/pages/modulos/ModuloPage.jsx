@@ -3,10 +3,13 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import RutaProtegida from '../../components/auth/RutaProtegida';
 import { buscarModulo } from '../../config/modulos';
 import UsuariosPage from '../usuarios/UsuariosPage';
+import CotizacionesModulo from '../cotizaciones/CotizacionesModulo';
 
 // Módulos que ya tienen pantalla propia. Los demás muestran el contenido pendiente.
+// Una pantalla puede definir sus propias subrutas con <Routes> (ver CotizacionesModulo).
 const PANTALLAS = {
   usuarios: UsuariosPage,
+  cotizaciones: CotizacionesModulo,
 };
 
 /**

@@ -21,6 +21,11 @@ export const ROLES = {
 export const PERMISOS = {
   USUARIOS_GESTIONAR: 'usuarios:gestionar',
   ROLES_GESTIONAR: 'roles:gestionar',
+  COTIZACIONES_VER: 'cotizaciones:ver',
+  COTIZACIONES_CREAR: 'cotizaciones:crear',
+  COTIZACIONES_EDITAR: 'cotizaciones:editar',
+  COTIZACIONES_APROBAR: 'cotizaciones:aprobar',
+  COTIZACIONES_ELIMINAR: 'cotizaciones:eliminar',
 };
 
 // Nombre legible de cada rol para mostrar en pantalla
@@ -74,6 +79,13 @@ export const MODULOS = [
     descripcion: 'Crear usuarios, asignar roles y activar o desactivar cuentas.',
     ruta: '/modulos/usuarios',
     permiso: PERMISOS.USUARIOS_GESTIONAR,
+  },
+  {
+    id: 'cotizaciones',
+    titulo: 'Cotizaciones',
+    descripcion: 'Registro de las cotizaciones enviadas a los clientes, con su estado y factura.',
+    ruta: '/modulos/cotizaciones',
+    permiso: PERMISOS.COTIZACIONES_VER,
   },
 ];
 
