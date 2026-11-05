@@ -4,6 +4,7 @@ import {
   company,
   navLinks,
   heroBadges,
+  heroFotos,
   services,
   values,
   steps,
@@ -199,8 +200,16 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
             </div>
 
             <div className="lp-hero__visual" data-reveal>
-              <div className="lp-hero__frame">
-                <img src={logo.src} alt={logo.alt} />
+              <div className="lp-hero__collage">
+                {heroFotos.map((f, i) => (
+                  <img
+                    key={f.src}
+                    src={f.src}
+                    alt={f.alt}
+                    className={i === 0 ? 'lp-hero__foto lp-hero__foto--principal' : 'lp-hero__foto'}
+                    fetchPriority={i === 0 ? 'high' : undefined}
+                  />
+                ))}
               </div>
               <div className="lp-hero__card">
                 <Icon name="automatizacion" />
@@ -226,7 +235,13 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
             <span className="lp-clients__label">Empresas que confían en nosotros</span>
             <ul>
               {clients.map((c) => (
-                <li key={c}>{c}</li>
+                <li key={c.nombre}>
+                  {c.logo ? (
+                    <img src={c.logo} alt={c.nombre} title={c.nombre} loading="lazy" />
+                  ) : (
+                    c.nombre
+                  )}
+                </li>
               ))}
             </ul>
           </div>

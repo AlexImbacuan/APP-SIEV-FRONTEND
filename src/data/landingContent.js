@@ -24,6 +24,23 @@ export const navLinks = [
   { href: '#contacto', label: 'Contacto' },
 ];
 
+// Fotos reales del collage del hero (public/images/Trabajos, optimizadas para web).
+// La primera es la grande; las otras dos van a la derecha.
+export const heroFotos = [
+  {
+    src: '/images/Trabajos/hero-tecnico.jpg',
+    alt: 'Técnico de SIEV cableando un tablero de control',
+  },
+  {
+    src: '/images/Trabajos/hero-altura.jpg',
+    alt: 'Equipo de SIEV trabajando en altura desde un brazo articulado',
+  },
+  {
+    src: '/images/Trabajos/hero-tablero.jpg',
+    alt: 'Tablero de automatización con variadores instalado por SIEV',
+  },
+];
+
 export const heroBadges = [
   'Baja y media tensión',
   'Automatización Siemens · Delta',
@@ -132,10 +149,11 @@ export const logo = {
   alt: 'SIEV - Soluciones Integrales Eléctricas del Valle S.A.S.',
 };
 
+// Logos en public/images/clientes (PNG con fondo transparente).
+// Un cliente sin "logo" se muestra con su nombre en texto.
 export const clients = [
-  'Cargill',
-  'Pollos El Bucanero',
-  'Avícola Pollo Listo',
-  'Agrograin',
-  'Savicol',
+  { nombre: 'Cargill', logo: '/images/clientes/cargill.png' },
+  { nombre: 'Avícola Pollo Listo', logo: '/images/clientes/pollo-listo.png' },
+  { nombre: 'Agrograin', logo: '/images/clientes/agrograin.png' },
+  { nombre: 'Savicol', logo: '/images/clientes/savicol.png' },
 ];
