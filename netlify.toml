@@ -2,10 +2,36 @@
   command = "npm run build"
   publish = "build"
 
+# ===== Rutas de la app (React Router) =====
+# Solo las rutas que existen en src/App.js se sirven con index.html.
+# Cualquier otra dirección responde 404 de verdad (public/404.html), para que Google
+# y los agentes de IA no reciban la página de inicio como si fuera otra página.
+# Si se agrega una ruta pública nueva en App.js, agréguela también aquí.
+# (Los archivos que existen, como /sitemap.xml o /llms.txt, se sirven antes que estas reglas.)
 [[redirects]]
-  from = "/*"
+  from = "/login"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "/login/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/modulos"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/modulos/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
 
 # ===== Caché del navegador =====
 # Archivos del build con huella en el nombre (main.abc123.js): nunca cambian, caché de 1 año.
@@ -20,3 +46,9 @@
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+
+# llms.txt: resumen de SIEV para asistentes de IA (ChatGPT, Gemini, Claude...)
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
