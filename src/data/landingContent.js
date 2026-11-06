@@ -18,10 +18,10 @@ export const company = {
 };
 
 export const navLinks = [
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#proceso', label: 'Cómo trabajamos' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/#servicios', label: 'Servicios' },
+  { href: '/#nosotros', label: 'Nosotros' },
+  { href: '/#proceso', label: 'Cómo trabajamos' },
+  { href: '/#contacto', label: 'Contacto' },
 ];
 
 // Fotos reales del collage del hero (public/images/Trabajos).
@@ -48,22 +48,25 @@ export const heroFotos = [
 ];
 
 export const heroBadges = [
+  'Más de 10 años de experiencia',
+  'Visita y cotización sin costo',
   'Baja y media tensión',
   'Automatización Siemens · Delta',
-  'Trabajo en altura y espacios confinados',
 ];
 
 export const services = [
   {
     icon: 'rayo',
     title: 'Montajes eléctricos en baja y media tensión',
-    desc: 'Acometidas, redes, subestaciones y montajes industriales ejecutados con normativa vigente y personal calificado.',
+    desc: 'Bandeja portacables, tubería, cableado, acometidas y montajes industriales con personal calificado.',
     featured: true,
+    slug: 'montajes-electricos',
   },
   {
     icon: 'tablero',
-    title: 'Tableros eléctricos',
-    desc: 'Armado, cableado, modernización y mantenimiento de tableros de distribución, control y fuerza.',
+    title: 'Tableros eléctricos de control y fuerza',
+    desc: 'Fabricación, cableado y modernización de tableros de control, fuerza, CCM y distribución.',
+    slug: 'tableros-electricos',
   },
   {
     icon: 'automatizacion',
@@ -79,26 +82,24 @@ export const services = [
     icon: 'factor',
     title: 'Corrección de factor de potencia',
     desc: 'Estudio, bancos de condensadores y control para reducir penalizaciones por energía reactiva.',
+    slug: 'correccion-factor-potencia',
   },
   {
     icon: 'bandeja',
     title: 'Bandejas portacables y tubería',
     desc: 'Canalizaciones ordenadas y seguras en bandeja, tubería EMT, IMC y PVC.',
+    slug: 'montajes-electricos',
   },
   {
     icon: 'mantenimiento',
-    title: 'Mantenimiento preventivo',
+    title: 'Mantenimiento eléctrico preventivo y correctivo',
     desc: 'Rutinas programadas, termografía, ajustes y limpieza para evitar paros no planeados.',
+    slug: 'mantenimiento-electrico',
   },
   {
     icon: 'planos',
     title: 'Planos y diseño eléctrico',
     desc: 'Levantamientos, diagramas unifilares y planos de proyectos eléctricos.',
-  },
-  {
-    icon: 'planta',
-    title: 'Alquiler de plantas eléctricas',
-    desc: 'Respaldo de energía para obras, eventos y contingencias en planta.',
   },
   {
     icon: 'suministro',

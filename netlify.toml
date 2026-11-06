@@ -2,30 +2,37 @@
   command = "npm run build"
   publish = "build"
 
-# ===== Rutas de la app (React Router) =====
-# Solo las rutas que existen en src/App.js se sirven con index.html.
-# Cualquier otra dirección responde 404 de verdad (public/404.html), para que Google
-# y los agentes de IA no reciban la página de inicio como si fuera otra página.
-# Si se agrega una ruta pública nueva en App.js, agréguela también aquí.
+# ===== Rutas =====
+# - Portada (/) y páginas de servicio: HTML ya armado por scripts/prerender.js.
+# - Login y panel: app.html (la app sin contenido prearmado, para que no se vea la portada
+#   por un instante antes del panel).
+# - Cualquier otra dirección responde 404 de verdad (public/404.html), para que Google
+#   y los agentes de IA no reciban la portada como si fuera otra página.
+# Si se agrega una ruta nueva en src/App.js, agréguela también aquí.
 # (Los archivos que existen, como /sitemap.xml o /llms.txt, se sirven antes que estas reglas.)
 [[redirects]]
+  from = "/servicios/:slug"
+  to = "/servicios/:slug.html"
+  status = 200
+
+[[redirects]]
   from = "/login"
-  to = "/index.html"
+  to = "/app.html"
   status = 200
 
 [[redirects]]
   from = "/login/*"
-  to = "/index.html"
+  to = "/app.html"
   status = 200
 
 [[redirects]]
   from = "/modulos"
-  to = "/index.html"
+  to = "/app.html"
   status = 200
 
 [[redirects]]
   from = "/modulos/*"
-  to = "/index.html"
+  to = "/app.html"
   status = 200
 
 [[redirects]]

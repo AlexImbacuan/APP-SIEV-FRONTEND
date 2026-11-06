@@ -1,0 +1,328 @@
+{
+  "ciudades": [
+    "Cali",
+    "Palmira",
+    "Yumbo",
+    "Jamundí",
+    "Candelaria",
+    "Florida",
+    "Pradera",
+    "El Cerrito",
+    "Buga",
+    "Tuluá"
+  ],
+  "ventajas": [
+    "Más de 10 años de experiencia en el Valle del Cauca",
+    "Visita técnica y cotización sin costo",
+    "Personal certificado en trabajo en altura y espacios confinados",
+    "Trabajamos en el horario que su operación necesite"
+  ],
+  "preguntasGenerales": [
+    {
+      "pregunta": "¿En qué ciudades trabajan?",
+      "respuesta": "Tenemos sede en Villagorgona (Candelaria) y atendemos en Cali, Palmira, Yumbo, Jamundí, Candelaria y el resto del Valle del Cauca."
+    },
+    {
+      "pregunta": "¿La visita técnica y la cotización tienen costo?",
+      "respuesta": "No. Visitamos su sitio, revisamos lo que necesita y le enviamos la cotización sin ningún costo."
+    },
+    {
+      "pregunta": "¿Cuánta experiencia tienen?",
+      "respuesta": "Más de 10 años haciendo montajes eléctricos, tableros y mantenimiento para la industria, el comercio y el hogar en el Valle del Cauca."
+    },
+    {
+      "pregunta": "¿Trabajan fuera del horario de producción?",
+      "respuesta": "Sí. El horario se ajusta a cada trabajo: podemos trabajar en paradas programadas, de noche o los fines de semana para no afectar su operación."
+    },
+    {
+      "pregunta": "¿Con qué marcas de automatización trabajan?",
+      "respuesta": "Principalmente con Siemens y Delta: PLC, variadores de velocidad y pantallas HMI."
+    },
+    {
+      "pregunta": "¿Cómo solicito una cotización?",
+      "respuesta": "Escríbanos por WhatsApp al 318 309 0738, llámenos o llene el formulario de esta página. Le respondemos para coordinar la visita técnica."
+    }
+  ],
+  "servicios": [
+    {
+      "slug": "montajes-electricos",
+      "nombre": "Montajes eléctricos",
+      "icono": "rayo",
+      "tituloSeo": "Montajes eléctricos industriales en Cali, Palmira y Yumbo | SIEV S.A.S.",
+      "descripcionSeo": "Montajes eléctricos en baja y media tensión: bandeja portacables, tubería y cableado para industria y comercio en Cali, Palmira, Yumbo y el Valle del Cauca. Visita y cotización sin costo.",
+      "h1": "Montajes eléctricos industriales en Cali, Palmira y Yumbo",
+      "resumen": "Bandeja portacables, tubería y cableado en baja y media tensión.",
+      "intro": [
+        "Instalamos la infraestructura eléctrica de plantas, bodegas y locales comerciales: desde la canalización en bandeja portacables o tubería hasta el cableado y la conexión de tableros, motores y equipos.",
+        "Trabajamos en baja y media tensión con personal certificado en trabajo en altura y espacios confinados, y coordinamos cada etapa con su área de mantenimiento para no afectar la operación."
+      ],
+      "foto": {
+        "base": "/images/Trabajos/cuarto-electrico",
+        "anchos": [400, 800],
+        "ancho": 800,
+        "alto": 1067,
+        "alt": "Cuarto eléctrico con bandejas portacables y tableros"
+      },
+      "incluye": [
+        {
+          "titulo": "Bandeja portacables",
+          "texto": "Suministro e instalación de bandeja tipo escalerilla o perforada, con soportes, curvas y derivaciones para llevar el cableado ordenado por toda la planta."
+        },
+        {
+          "titulo": "Tubería EMT, IMC y PVC",
+          "texto": "Canalización a la vista o embebida según el ambiente: zonas de producción, áreas húmedas, exteriores o espacios comerciales."
+        },
+        {
+          "titulo": "Cableado de fuerza y control",
+          "texto": "Tendido, marcación y conexión de alimentadores, circuitos de fuerza y señales de control hacia motores, máquinas y tableros."
+        },
+        {
+          "titulo": "Acometidas y media tensión",
+          "texto": "Acometidas, redes y montajes asociados a subestaciones en baja y media tensión."
+        },
+        {
+          "titulo": "Conexión de equipos y maquinaria",
+          "texto": "Instalación eléctrica de líneas de producción, motores, compresores y equipos nuevos o trasladados."
+        },
+        {
+          "titulo": "Trabajo en altura y espacios confinados",
+          "texto": "Montajes en cubiertas, estructuras y fosos con personal certificado y protocolos de seguridad."
+        }
+      ],
+      "paraQuien": [
+        "Plantas de producción que amplían o trasladan líneas",
+        "Bodegas y centros de distribución nuevos",
+        "Empresas que necesitan ordenar o reemplazar su cableado",
+        "Locales comerciales y obras en etapa de instalaciones"
+      ],
+      "preguntas": [
+        {
+          "pregunta": "¿Qué diferencia hay entre bandeja portacables y tubería?",
+          "respuesta": "La bandeja deja el cableado a la vista y facilita agregar o cambiar circuitos más adelante; es lo habitual en plantas con muchos cables. La tubería protege mejor cada circuito y se usa en zonas húmedas, exteriores o donde el cable queda expuesto a golpes. En la visita técnica le recomendamos la opción adecuada para cada tramo."
+        },
+        {
+          "pregunta": "¿Pueden hacer el montaje sin detener la producción?",
+          "respuesta": "En la mayoría de los casos sí. Programamos los trabajos por etapas y, cuando hay que desenergizar, lo coordinamos con su área de mantenimiento para hacerlo en paradas programadas, fines de semana o en el horario que la operación permita."
+        },
+        {
+          "pregunta": "¿Trabajan en media tensión?",
+          "respuesta": "Sí. Hacemos montajes en baja y media tensión, incluidas acometidas y redes asociadas a subestaciones."
+        },
+        {
+          "pregunta": "¿Cuánto cuesta la visita técnica?",
+          "respuesta": "La visita técnica y la cotización no tienen costo. Revisamos el sitio, tomamos medidas y le enviamos una propuesta detallada."
+        }
+      ]
+    },
+    {
+      "slug": "tableros-electricos",
+      "nombre": "Tableros de control y fuerza",
+      "icono": "tablero",
+      "tituloSeo": "Fabricación de tableros eléctricos de control y fuerza en Cali | SIEV S.A.S.",
+      "descripcionSeo": "Fabricamos, cableamos y modernizamos tableros eléctricos de control y fuerza, CCM y tableros de distribución con Siemens y Delta. Cali, Palmira, Yumbo y el Valle del Cauca.",
+      "h1": "Fabricación de tableros eléctricos de control y fuerza en Cali y el Valle del Cauca",
+      "resumen": "Tableros a la medida, CCM y modernización de tableros existentes.",
+      "intro": [
+        "Diseñamos, armamos y cableamos tableros eléctricos a la medida de cada máquina o proceso: tableros de fuerza para distribución y arranque de motores, y tableros de control con PLC, variadores y HMI.",
+        "Entregamos el tablero probado, con su marcación y sus planos, y podemos encargarnos también de la instalación y la puesta en marcha en su planta."
+      ],
+      "foto": {
+        "base": "/images/Trabajos/hero-tablero",
+        "anchos": [400, 700],
+        "ancho": 700,
+        "alto": 933,
+        "alt": "Tablero eléctrico con variadores de velocidad y protecciones"
+      },
+      "incluye": [
+        {
+          "titulo": "Tableros de fuerza",
+          "texto": "Distribución, protecciones y arranque de motores: directo, estrella-triángulo, con arrancador suave o con variador de velocidad."
+        },
+        {
+          "titulo": "Tableros de control",
+          "texto": "Integración de PLC, variadores, HMI, relés y señalización para automatizar máquinas y procesos con Siemens y Delta."
+        },
+        {
+          "titulo": "Centros de control de motores (CCM)",
+          "texto": "Arranques y protecciones de varios motores agrupados en un solo gabinete, ordenado y fácil de mantener."
+        },
+        {
+          "titulo": "Tableros de distribución",
+          "texto": "Tableros generales y parciales para plantas, bodegas y locales comerciales."
+        },
+        {
+          "titulo": "Modernización de tableros",
+          "texto": "Reemplazo de equipos obsoletos, recableado y actualización de protecciones, sin cambiar todo el gabinete cuando no hace falta."
+        },
+        {
+          "titulo": "Planos y marcación",
+          "texto": "Diagramas unifilares y de control, y marcación de cables y bornes para que su equipo de mantenimiento trabaje con seguridad."
+        }
+      ],
+      "paraQuien": [
+        "Fabricantes de maquinaria que necesitan el tablero de su equipo",
+        "Plantas que automatizan una línea o un proceso",
+        "Empresas con tableros antiguos, desordenados o sin planos",
+        "Proyectos nuevos que requieren tableros de distribución"
+      ],
+      "preguntas": [
+        {
+          "pregunta": "¿Qué diferencia hay entre un tablero de control y uno de fuerza?",
+          "respuesta": "El tablero de fuerza maneja la energía que alimenta los motores y equipos: breakers, contactores y arrancadores. El de control maneja la lógica: PLC, relés, botoneras y señales que deciden cuándo y cómo arranca cada equipo. Muchas veces van en el mismo gabinete, separados por secciones."
+        },
+        {
+          "pregunta": "¿Con qué marcas trabajan?",
+          "respuesta": "En automatización trabajamos principalmente con Siemens y Delta (PLC, variadores y HMI). Para el resto de componentes usamos las marcas que requiera el proyecto o el estándar de su planta."
+        },
+        {
+          "pregunta": "¿Pueden modificar un tablero que ya tengo?",
+          "respuesta": "Sí. Revisamos el tablero, le decimos qué se puede conservar y qué conviene cambiar, y lo modernizamos con sus planos actualizados."
+        },
+        {
+          "pregunta": "¿El precio incluye la instalación?",
+          "respuesta": "Se define en la cotización según lo que necesite: podemos entregar solo el tablero o encargarnos también del montaje, el cableado en planta y la puesta en marcha. La visita técnica y la cotización no tienen costo."
+        }
+      ]
+    },
+    {
+      "slug": "mantenimiento-electrico",
+      "nombre": "Mantenimiento eléctrico",
+      "icono": "mantenimiento",
+      "tituloSeo": "Mantenimiento eléctrico industrial en Cali, Palmira y Yumbo | SIEV S.A.S.",
+      "descripcionSeo": "Mantenimiento eléctrico preventivo y correctivo para plantas, empresas y comercios: tableros, motores, termografía y ajuste de conexiones. Cali, Palmira, Yumbo y el Valle del Cauca.",
+      "h1": "Mantenimiento eléctrico industrial en Cali, Palmira y Yumbo",
+      "resumen": "Preventivo y correctivo: tableros, motores, termografía e informes.",
+      "intro": [
+        "Un tablero con conexiones flojas o un motor recalentado avisan antes de fallar. Con un plan de mantenimiento preventivo detectamos esos problemas a tiempo y evitamos paros no programados.",
+        "También atendemos mantenimiento correctivo cuando la falla ya ocurrió, en el horario que su operación necesite."
+      ],
+      "foto": {
+        "base": "/images/Trabajos/mantenimiento-tablero",
+        "anchos": [400, 800],
+        "ancho": 800,
+        "alto": 1067,
+        "alt": "Técnico revisando las conexiones de un tablero eléctrico"
+      },
+      "incluye": [
+        {
+          "titulo": "Mantenimiento preventivo programado",
+          "texto": "Rutinas mensuales, trimestrales o semestrales según la importancia de cada equipo, con informe de lo encontrado."
+        },
+        {
+          "titulo": "Termografía",
+          "texto": "Inspección con cámara térmica para encontrar puntos calientes en conexiones, breakers y barrajes antes de que fallen."
+        },
+        {
+          "titulo": "Limpieza y ajuste de tableros",
+          "texto": "Limpieza, reapriete de conexiones, revisión de protecciones y cambio de componentes desgastados."
+        },
+        {
+          "titulo": "Motores y arrancadores",
+          "texto": "Medición de consumo y aislamiento, y revisión de contactores, variadores y arrancadores."
+        },
+        {
+          "titulo": "Mantenimiento correctivo",
+          "texto": "Diagnóstico y reparación de fallas eléctricas en tableros, circuitos, motores e iluminación."
+        },
+        {
+          "titulo": "Informe técnico",
+          "texto": "Reporte con hallazgos, fotos y recomendaciones priorizadas para su área de mantenimiento."
+        }
+      ],
+      "paraQuien": [
+        "Plantas de producción que no pueden permitirse paros",
+        "Empresas sin personal eléctrico propio",
+        "Áreas de mantenimiento que necesitan apoyo en temporadas de carga",
+        "Comercios y edificios con fallas eléctricas recurrentes"
+      ],
+      "preguntas": [
+        {
+          "pregunta": "¿Cada cuánto se debe hacer mantenimiento eléctrico?",
+          "respuesta": "Depende del uso y del ambiente. Como referencia, los tableros principales y los equipos críticos de una planta se revisan cada 6 a 12 meses, y con más frecuencia si hay polvo, humedad o vibración. En la visita le proponemos un plan según sus equipos."
+        },
+        {
+          "pregunta": "¿Hay que apagar la planta para el mantenimiento?",
+          "respuesta": "Algunas revisiones, como la termografía, se hacen con los equipos funcionando. La limpieza y el ajuste de conexiones requieren desenergizar, por eso los programamos en paradas, fines de semana o en el horario que usted defina."
+        },
+        {
+          "pregunta": "¿Atienden fallas fuera del horario normal?",
+          "respuesta": "Sí. El horario se ajusta a cada trabajo, incluidos fines de semana y horarios fuera de producción. Escríbanos por WhatsApp y le confirmamos disponibilidad."
+        },
+        {
+          "pregunta": "¿La visita técnica tiene costo?",
+          "respuesta": "No. La visita técnica y la cotización no tienen costo."
+        }
+      ]
+    },
+    {
+      "slug": "correccion-factor-potencia",
+      "nombre": "Corrección del factor de potencia",
+      "icono": "factor",
+      "tituloSeo": "Corrección del factor de potencia en Cali, Palmira y Yumbo | SIEV S.A.S.",
+      "descripcionSeo": "Evite cobros por energía reactiva: estudio de carga, bancos de condensadores y controladores automáticos para corregir el factor de potencia. Cali, Palmira, Yumbo y el Valle del Cauca.",
+      "h1": "Corrección del factor de potencia en Cali, Palmira y Yumbo",
+      "resumen": "Bancos de condensadores para dejar de pagar energía reactiva.",
+      "intro": [
+        "Si en su factura de energía aparece un cobro por energía reactiva, su instalación está pagando de más por algo que se puede corregir.",
+        "Medimos su carga, dimensionamos el banco de condensadores adecuado y lo instalamos con control automático para que el factor de potencia se mantenga dentro de lo permitido."
+      ],
+      "foto": {
+        "base": "/images/Trabajos/hero-tecnico",
+        "anchos": [400, 700],
+        "ancho": 700,
+        "alto": 933,
+        "alt": "Técnico de SIEV cableando un tablero eléctrico"
+      },
+      "incluye": [
+        {
+          "titulo": "Revisión de facturas y medición",
+          "texto": "Analizamos sus facturas y medimos la carga real para saber cuánta energía reactiva hay que compensar."
+        },
+        {
+          "titulo": "Bancos de condensadores",
+          "texto": "Suministro e instalación de bancos fijos o automáticos dimensionados para su consumo."
+        },
+        {
+          "titulo": "Controlador automático",
+          "texto": "Regulador que conecta y desconecta pasos del banco según la carga, para no quedarse corto ni sobrecompensar."
+        },
+        {
+          "titulo": "Tablero y protecciones",
+          "texto": "Gabinete, protecciones y cableado del banco, conectado al tablero general."
+        },
+        {
+          "titulo": "Puesta en marcha y verificación",
+          "texto": "Pruebas y ajuste del controlador, y seguimiento del resultado en las siguientes facturas."
+        },
+        {
+          "titulo": "Mantenimiento del banco",
+          "texto": "Revisión periódica de condensadores, contactores y controlador para que el banco siga funcionando bien."
+        }
+      ],
+      "paraQuien": [
+        "Empresas a las que les cobran energía reactiva en la factura",
+        "Plantas con muchos motores, compresores o soldadores",
+        "Instalaciones con bancos de condensadores dañados o desajustados",
+        "Proyectos nuevos que quieren evitar el cobro desde el inicio"
+      ],
+      "preguntas": [
+        {
+          "pregunta": "¿Qué es el factor de potencia?",
+          "respuesta": "Es una medida de qué tan bien aprovecha su instalación la energía que recibe. Los motores, transformadores y otros equipos consumen energía reactiva, que no produce trabajo útil pero sí carga la red. Cuando esa energía pasa del límite permitido, el operador de red la cobra en la factura."
+        },
+        {
+          "pregunta": "¿Cómo sé si me están cobrando energía reactiva?",
+          "respuesta": "Revise su factura: aparece como energía reactiva, kVArh o un cobro adicional por reactiva. Si nos envía una copia, le decimos si conviene corregirlo."
+        },
+        {
+          "pregunta": "¿En cuánto tiempo se recupera la inversión?",
+          "respuesta": "Depende de cuánto pague hoy por energía reactiva. Con sus facturas hacemos el cálculo y se lo incluimos en la cotización, sin costo."
+        },
+        {
+          "pregunta": "¿Un banco de condensadores necesita mantenimiento?",
+          "respuesta": "Sí. Los condensadores pierden capacidad con el tiempo y los contactores se desgastan. Recomendamos revisarlo al menos una vez al año."
+        }
+      ]
+    }
+  ]
+}

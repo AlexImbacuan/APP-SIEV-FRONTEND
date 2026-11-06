@@ -6,6 +6,7 @@ import PanelLayout from './components/layout/PanelLayout';
 import RutaProtegida from './components/auth/RutaProtegida';
 import InicioModulos from './pages/modulos/InicioModulos';
 import ModuloPage from './pages/modulos/ModuloPage';
+import ServicioRuta from './pages/servicios/ServicioRuta';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Inicio />} />
+      <Route path="/servicios/:slug" element={<ServicioRuta />} />
       <Route path="/login" element={<LoginPage />} />
 
       {/* Área privada: requiere sesión. Cada módulo valida además su rol. */}

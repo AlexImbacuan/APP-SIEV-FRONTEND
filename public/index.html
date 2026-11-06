@@ -6,10 +6,12 @@
     <meta name="theme-color" content="#1b1f5c" />
 
     <!-- ===== SEO básico ===== -->
-    <title>SIEV | Montajes eléctricos y tableros en Cali, Palmira y el Valle del Cauca</title>
+    <!-- Título y descripción de la portada. Las páginas de servicio toman los suyos de
+         src/data/servicios.json (scripts/prerender.js los reemplaza al compilar). -->
+    <title>SIEV S.A.S. | Montajes eléctricos y tableros en Cali, Palmira y Yumbo</title>
     <meta
       name="description"
-      content="SIEV: montajes eléctricos en baja y media tensión, tableros eléctricos, automatización Siemens y Delta, mantenimiento e iluminación en Cali, Palmira, Candelaria y todo el Valle del Cauca. Solicite su cotización."
+      content="SIEV S.A.S.: más de 10 años en montajes eléctricos, tableros de control y fuerza, mantenimiento eléctrico y corrección del factor de potencia en Cali, Palmira, Yumbo y el Valle del Cauca. Visita y cotización sin costo."
     />
     <link rel="canonical" href="https://sievsas.com/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -40,11 +42,11 @@
     <meta property="og:url" content="https://sievsas.com/" />
     <meta
       property="og:title"
-      content="SIEV | Soluciones Integrales Eléctricas del Valle"
+      content="SIEV S.A.S. | Montajes eléctricos y tableros en Cali, Palmira y Yumbo"
     />
     <meta
       property="og:description"
-      content="Montajes eléctricos, tableros, automatización y mantenimiento en Cali, Palmira, Candelaria y todo el Valle del Cauca."
+      content="Montajes eléctricos, tableros de control y fuerza y mantenimiento eléctrico en Cali, Palmira, Yumbo y todo el Valle del Cauca. Visita y cotización sin costo."
     />
     <meta property="og:image" content="https://sievsas.com/images/og-siev.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -54,10 +56,13 @@
       content="SIEV: técnico cableando un tablero eléctrico. Energía bien instalada, trabajo bien hecho."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SIEV | Soluciones Integrales Eléctricas del Valle" />
+    <meta
+      name="twitter:title"
+      content="SIEV S.A.S. | Montajes eléctricos y tableros en Cali, Palmira y Yumbo"
+    />
     <meta
       name="twitter:description"
-      content="Montajes eléctricos, tableros, automatización y mantenimiento en todo el Valle del Cauca."
+      content="Montajes eléctricos, tableros de control y fuerza y mantenimiento eléctrico en Cali, Palmira, Yumbo y todo el Valle del Cauca. Visita y cotización sin costo."
     />
     <meta name="twitter:image" content="https://sievsas.com/images/og-siev.jpg" />
 
@@ -69,7 +74,7 @@
         "@type": "Electrician",
         "@id": "https://sievsas.com/#empresa",
         "name": "SIEV - Soluciones Integrales Eléctricas del Valle S.A.S.",
-        "alternateName": "SIEV",
+        "alternateName": ["SIEV S.A.S.", "SIEV SAS", "SIEV"],
         "legalName": "Soluciones Integrales Eléctricas del Valle S.A.S.",
         "taxID": "900.887.302-0",
         "url": "https://sievsas.com/",
@@ -80,7 +85,7 @@
           "https://sievsas.com/images/Trabajos/hero-altura.jpg",
           "https://sievsas.com/images/Trabajos/hero-tablero.jpg"
         ],
-        "description": "Montajes eléctricos en baja y media tensión, tableros eléctricos, automatización industrial Siemens y Delta, mantenimiento, iluminación y trabajo en altura para la industria, el comercio y el hogar en el Valle del Cauca.",
+        "description": "Más de 10 años en montajes eléctricos en baja y media tensión, fabricación de tableros de control y fuerza, mantenimiento eléctrico, corrección del factor de potencia y automatización Siemens y Delta para la industria, el comercio y el hogar en el Valle del Cauca.",
         "telephone": "+57 318 309 0738",
         "email": "sie.delvalle@hotmail.com",
         "contactPoint": [
@@ -109,16 +114,22 @@
         "areaServed": [
           { "@type": "City", "name": "Cali" },
           { "@type": "City", "name": "Palmira" },
-          { "@type": "City", "name": "Candelaria" },
           { "@type": "City", "name": "Yumbo" },
           { "@type": "City", "name": "Jamundí" },
+          { "@type": "City", "name": "Candelaria" },
+          { "@type": "City", "name": "Florida" },
+          { "@type": "City", "name": "Pradera" },
+          { "@type": "City", "name": "El Cerrito" },
+          { "@type": "City", "name": "Buga" },
+          { "@type": "City", "name": "Tuluá" },
           { "@type": "AdministrativeArea", "name": "Valle del Cauca" }
         ],
         "knowsAbout": [
           "Montajes eléctricos en baja y media tensión",
-          "Tableros eléctricos",
+          "Bandeja portacables, tubería y cableado",
+          "Tableros eléctricos de control y fuerza",
           "Automatización industrial Siemens y Delta",
-          "Mantenimiento eléctrico preventivo",
+          "Mantenimiento eléctrico preventivo y correctivo",
           "Proyectos de iluminación",
           "Corrección de factor de potencia",
           "Trabajo en altura y espacios confinados"
@@ -127,15 +138,13 @@
           "@type": "OfferCatalog",
           "name": "Servicios eléctricos",
           "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Montajes eléctricos en baja y media tensión" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tableros eléctricos" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Montajes eléctricos", "url": "https://sievsas.com/servicios/montajes-electricos" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tableros eléctricos de control y fuerza", "url": "https://sievsas.com/servicios/tableros-electricos" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento eléctrico", "url": "https://sievsas.com/servicios/mantenimiento-electrico" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corrección del factor de potencia", "url": "https://sievsas.com/servicios/correccion-factor-potencia" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización industrial" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Proyectos de iluminación" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corrección de factor de potencia" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bandejas portacables y tubería" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento preventivo" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Planos y diseño eléctrico" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alquiler de plantas eléctricas" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Suministro de materiales eléctricos" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trabajo en altura y espacios confinados" } }
           ]
@@ -144,20 +153,8 @@
     </script>
   </head>
   <body>
-    <!-- Contenido básico para buscadores y navegadores sin JavaScript -->
-    <noscript>
-      <h1>SIEV - Soluciones Integrales Eléctricas del Valle S.A.S.</h1>
-      <p>
-        Montajes eléctricos en baja y media tensión, tableros eléctricos, automatización
-        industrial Siemens y Delta, mantenimiento preventivo, iluminación, corrección de factor de
-        potencia y trabajo en altura en Cali, Palmira, Candelaria y todo el Valle del Cauca.
-      </p>
-      <p>
-        Cel. 318 309 0738 · 314 637 2034 · sie.delvalle@hotmail.com · Cra 3A # 14-117,
-        Villagorgona, Candelaria, Valle del Cauca.
-      </p>
-      <p>Para ver la página completa, active JavaScript en su navegador.</p>
-    </noscript>
+    <!-- Al compilar, scripts/prerender.js llena #root con el HTML de cada página
+         (contenido visible para Google y asistentes de IA sin ejecutar JavaScript). -->
     <div id="root"></div>
   </body>
 </html>

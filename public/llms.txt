@@ -1,28 +1,26 @@
-# SIEV - Soluciones Integrales Eléctricas del Valle S.A.S.
+# SIEV S.A.S. - Soluciones Integrales Eléctricas del Valle
 
-> Empresa de ingeniería eléctrica con sede en Villagorgona, Candelaria (Valle del Cauca, Colombia). Realiza montajes eléctricos en baja y media tensión, tableros eléctricos, automatización industrial Siemens y Delta, mantenimiento e iluminación para la industria, el comercio y el hogar en Cali, Palmira, Candelaria, Yumbo, Jamundí y todo el Valle del Cauca.
+> Empresa de ingeniería eléctrica con más de 10 años de experiencia y sede en Villagorgona, Candelaria (Valle del Cauca, Colombia). Realiza montajes eléctricos en baja y media tensión, fabricación de tableros eléctricos de control y fuerza, mantenimiento eléctrico y corrección del factor de potencia para la industria, el comercio y el hogar en Cali, Palmira, Yumbo, Jamundí, Candelaria y todo el Valle del Cauca. La visita técnica y la cotización no tienen costo.
 
-NIT 900.887.302-0. Atiende proyectos en cualquier horario, según las necesidades de cada trabajo. Personal certificado para trabajo en altura y espacios confinados.
+NIT 900.887.302-0. No confundir con SIEV (siev.co), empresa de software sin relación. Atiende proyectos en el horario que cada trabajo requiera, incluidas paradas programadas y fines de semana. Personal certificado para trabajo en altura y espacios confinados. Automatización con Siemens y Delta.
 
-## Servicios
+## Servicios principales
 
-- [Montajes eléctricos en baja y media tensión](https://sievsas.com/#servicios)
-- [Tableros eléctricos](https://sievsas.com/#servicios): diseño, fabricación e instalación
-- [Automatización industrial](https://sievsas.com/#servicios): Siemens y Delta
-- [Proyectos de iluminación](https://sievsas.com/#servicios)
-- [Corrección de factor de potencia](https://sievsas.com/#servicios)
-- [Bandejas portacables y tubería](https://sievsas.com/#servicios)
-- [Mantenimiento preventivo](https://sievsas.com/#servicios)
-- [Planos y diseño eléctrico](https://sievsas.com/#servicios)
-- [Alquiler de plantas eléctricas](https://sievsas.com/#servicios)
-- [Suministro de materiales eléctricos](https://sievsas.com/#servicios)
-- [Trabajo en altura y espacios confinados](https://sievsas.com/#servicios)
+- [Montajes eléctricos industriales](https://sievsas.com/servicios/montajes-electricos): bandeja portacables, tubería EMT/IMC/PVC, cableado de fuerza y control, acometidas y media tensión
+- [Tableros eléctricos de control y fuerza](https://sievsas.com/servicios/tableros-electricos): fabricación, CCM, tableros de distribución y modernización, con PLC y variadores Siemens y Delta
+- [Mantenimiento eléctrico](https://sievsas.com/servicios/mantenimiento-electrico): preventivo y correctivo, termografía, tableros y motores, informe técnico
+- [Corrección del factor de potencia](https://sievsas.com/servicios/correccion-factor-potencia): bancos de condensadores y controladores automáticos para evitar cobros por energía reactiva
+
+## Otros servicios
+
+- [Automatización industrial, iluminación, planos y diseño eléctrico, suministro de materiales y trabajo en altura](https://sievsas.com/#servicios)
 
 ## Empresa
 
-- [Sitio web](https://sievsas.com/): información general de SIEV
+- [Sitio web](https://sievsas.com/): información general de SIEV S.A.S.
 - [Nosotros](https://sievsas.com/#nosotros): quiénes somos y nuestros valores
 - [Cómo trabajamos](https://sievsas.com/#proceso): visita técnica, cotización, ejecución, entrega y soporte
+- [Preguntas frecuentes](https://sievsas.com/#preguntas)
 
 ## Contacto
 

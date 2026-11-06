@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Páginas públicas del sitio. Agregue aquí cada nueva página pública. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<!-- Copia de referencia. Al compilar, scripts/prerender.js genera el sitemap real en
+     build/sitemap.xml a partir de src/data/servicios.json (agregue los servicios allá). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sievsas.com/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-tecnico.jpg</image:loc></image:image>
-    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-altura.jpg</image:loc></image:image>
-    <image:image><image:loc>https://sievsas.com/images/Trabajos/hero-tablero.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sievsas.com/servicios/montajes-electricos</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sievsas.com/servicios/tableros-electricos</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sievsas.com/servicios/mantenimiento-electrico</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sievsas.com/servicios/correccion-factor-potencia</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>

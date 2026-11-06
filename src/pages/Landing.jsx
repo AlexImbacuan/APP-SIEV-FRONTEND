@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Icon from '../components/landing/Icon';
+import SitioHeader from '../components/landing/SitioHeader';
+import SitioFooter from '../components/landing/SitioFooter';
+import PreguntasFrecuentes from '../components/landing/PreguntasFrecuentes';
 import {
   company,
-  navLinks,
   heroBadges,
   heroFotos,
   services,
@@ -11,6 +13,7 @@ import {
   clients,
   logo,
 } from '../data/landingContent';
+import contenidoServicios from '../data/servicios.json';
 import './Landing.css';
 
 // Mínimo de logos por vuelta para que la fila cubra todo el ancho sin dejar huecos
@@ -73,8 +76,6 @@ function CarruselClientes({ clientes }) {
  *  - onPanelClick (opcional): lleva al área de módulos ("Mis módulos").
  */
 export default function Landing({ onLoginClick, currentUser, onLogout, onPanelClick }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [form, setForm] = useState({
     nombre: '',
     empresa: '',
@@ -84,13 +85,6 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
   });
 
   // Menú con sombra al hacer scroll
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   // Animación de aparición de secciones
   useEffect(() => {
     const items = document.querySelectorAll('.lp [data-reveal]');
@@ -130,92 +124,14 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const closeMenu = () => setMenuOpen(false);
-  const year = new Date().getFullYear();
-
   return (
     <div className="lp">
-      {/* ===== MENÚ ===== */}
-      <header className={`lp-nav ${scrolled ? 'is-scrolled' : ''}`}>
-        <div className="lp-container lp-nav__inner">
-          <a href="#inicio" className="lp-nav__brand" onClick={closeMenu}>
-            <img
-              src={logo.src}
-              srcSet={logo.srcSet}
-              sizes="96px"
-              width={logo.ancho}
-              height={logo.alto}
-              alt={logo.alt}
-              className="lp-nav__logo"
-            />
-          </a>
-
-          <nav className={`lp-nav__links ${menuOpen ? 'is-open' : ''}`} aria-label="Principal">
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href} onClick={closeMenu}>
-                {l.label}
-              </a>
-            ))}
-            {currentUser ? (
-              <div className="lp-nav__user">
-                <span className="lp-nav__username" title={currentUser}>
-                  Hola, {currentUser}
-                </span>
-                {onPanelClick && (
-                  <button
-                    type="button"
-                    className="lp-nav__login"
-                    onClick={() => {
-                      closeMenu();
-                      onPanelClick();
-                    }}
-                  >
-                    Mis módulos
-                  </button>
-                )}
-                {onLogout && (
-                  <button
-                    type="button"
-                    className="lp-nav__login"
-                    onClick={() => {
-                      closeMenu();
-                      onLogout();
-                    }}
-                  >
-                    Cerrar sesión
-                  </button>
-                )}
-              </div>
-            ) : (
-              onLoginClick && (
-                <button
-                  type="button"
-                  className="lp-nav__login"
-                  onClick={() => {
-                    closeMenu();
-                    onLoginClick();
-                  }}
-                >
-                  Iniciar sesión
-                </button>
-              )
-            )}
-            <a href="#contacto" className="lp-btn lp-btn--primary lp-btn--sm" onClick={closeMenu}>
-              Cotizar
-            </a>
-          </nav>
-
-          <button
-            type="button"
-            className="lp-nav__toggle"
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <Icon name={menuOpen ? 'cerrar' : 'menu'} />
-          </button>
-        </div>
-      </header>
+      <SitioHeader
+        onLoginClick={onLoginClick}
+        currentUser={currentUser}
+        onLogout={onLogout}
+        onPanelClick={onPanelClick}
+      />
 
       <main>
         {/* ===== HERO ===== */}
@@ -227,17 +143,18 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
 
           <div className="lp-container lp-hero__inner">
             <div className="lp-hero__copy">
-              <span className="lp-eyebrow lp-eyebrow--light">
-                <span className="lp-dot" /> Ingeniería eléctrica · Valle del Cauca
-              </span>
-              <h1>
+              <h1 className="lp-hero__h1">
+                <span className="lp-dot" /> Montajes eléctricos, tableros y mantenimiento en Cali,
+                Palmira, Yumbo y el Valle del Cauca
+              </h1>
+              <p className="lp-hero__slogan">
                 Energía bien instalada.
                 <br />
                 <span className="lp-accent">Trabajo bien hecho.</span>
-              </h1>
+              </p>
               <p className="lp-hero__lead">
-                Montajes eléctricos, tableros, automatización y mantenimiento para la industria, el
-                comercio y el hogar en Cali, Palmira, Candelaria y todo el Valle del Cauca. Un
+                Más de 10 años instalando, fabricando y manteniendo sistemas eléctricos para la
+                industria, el comercio y el hogar. Visita técnica y cotización sin costo, con un
                 equipo unido y responsable que cumple lo que cotiza.
               </p>
               <div className="lp-hero__actions">
@@ -322,11 +239,11 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
                   <div className="lp-service__icon">
                     <Icon name={s.icon} size={s.featured ? 30 : 26} />
                   </div>
-                  <h3>{s.title}</h3>
+                  <h3>{s.slug ? <a href={`/servicios/${s.slug}`}>{s.title}</a> : s.title}</h3>
                   <p>{s.desc}</p>
-                  {s.featured && (
-                    <a href="#contacto" className="lp-link">
-                      Cotizar este servicio <Icon name="flecha" size={16} />
+                  {s.slug && (
+                    <a href={`/servicios/${s.slug}`} className="lp-link" tabIndex={-1}>
+                      Ver servicio <Icon name="flecha" size={16} />
                     </a>
                   )}
                 </article>
@@ -396,12 +313,23 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
           </div>
         </section>
 
+        {/* ===== PREGUNTAS FRECUENTES ===== */}
+        <section className="lp-section lp-section--soft" id="preguntas">
+          <div className="lp-container lp-container--narrow">
+            <div className="lp-section__head" data-reveal>
+              <span className="lp-eyebrow">Preguntas frecuentes</span>
+              <h2>Lo que nos preguntan antes de contratar</h2>
+            </div>
+            <PreguntasFrecuentes preguntas={contenidoServicios.preguntasGenerales} />
+          </div>
+        </section>
+
         {/* ===== CTA ===== */}
         <section className="lp-cta">
           <div className="lp-container lp-cta__inner" data-reveal>
             <div>
               <h2>¿Tiene un proyecto o una falla por resolver?</h2>
-              <p>Escríbanos y programamos una visita técnica.</p>
+              <p>Escríbanos y programamos una visita técnica sin costo.</p>
             </div>
             <a
               className="lp-btn lp-btn--light"
@@ -502,57 +430,7 @@ export default function Landing({ onLoginClick, currentUser, onLogout, onPanelCl
         </section>
       </main>
 
-      {/* ===== PIE ===== */}
-      <footer className="lp-footer">
-        <div className="lp-container lp-footer__inner">
-          <div className="lp-footer__brand">
-            <img
-              src={logo.src}
-              srcSet={logo.srcSet}
-              sizes="240px"
-              width={logo.ancho}
-              height={logo.alto}
-              alt={logo.alt}
-              className="lp-footer__logo"
-              loading="lazy"
-            />
-            <p>NIT {company.nit}</p>
-          </div>
-          <div>
-            <h3>Navegación</h3>
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href}>
-                {l.label}
-              </a>
-            ))}
-          </div>
-          <div>
-            <h3>Contacto</h3>
-            <span>Tel. {company.landline}</span>
-            {company.phones.map((p) => (
-              <span key={p}>Cel. {p}</span>
-            ))}
-            <a href={`mailto:${company.email}`}>{company.email}</a>
-            <span>{company.address}</span>
-          </div>
-        </div>
-        <div className="lp-container lp-footer__bottom">
-          © {year} {company.name}. Todos los derechos reservados.
-        </div>
-      </footer>
-
-      {/* Botón flotante de WhatsApp */}
-      <a
-        className="lp-whatsapp"
-        href={`https://wa.me/${company.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escribir por WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.5 6.5 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.5Z" />
-        </svg>
-      </a>
+      <SitioFooter />
     </div>
   );
 }
