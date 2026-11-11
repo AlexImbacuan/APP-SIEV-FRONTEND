@@ -7,9 +7,10 @@ import './Modal.css';
  *  - titulo: texto del encabezado
  *  - onClose(): cierra el modal (Escape, clic fuera o botón ✕)
  *  - bloqueado: mientras es true no se puede cerrar (p. ej. enviando datos)
+ *  - amplio: modal más ancho, para contenido con tablas
  *  - children: contenido
  */
-export default function Modal({ titulo, onClose, bloqueado = false, children }) {
+export default function Modal({ titulo, onClose, bloqueado = false, amplio = false, children }) {
   const ref = useRef(null);
   const tituloId = useId();
 
@@ -42,7 +43,7 @@ export default function Modal({ titulo, onClose, bloqueado = false, children }) 
     >
       <div
         ref={ref}
-        className="md-modal"
+        className={`md-modal ${amplio ? 'md-modal--amplio' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={tituloId}
