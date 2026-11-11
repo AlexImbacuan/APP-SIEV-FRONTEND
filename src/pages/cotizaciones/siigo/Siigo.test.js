@@ -536,3 +536,73 @@ describe('sincronizar ahora', () => {
     expect(screen.getByRole('button', { name: 'Sincronizar ahora' })).toBeEnabled();
   });
 });
+
+// ---------- Supervisor: solo Siigo, sin el registro propio ----------
+describe('supervisor (siigo:explorar y siigo:editar, sin cotizaciones:ver)', () => {
+  const SUPERVISOR = ['siigo:explorar', 'siigo:editar'];
+
+  test('al entrar al módulo termina en la vista de Siigo, sin pestañas ni botones del registro', async () => {
+    backend(SUPERVISOR);
+    renderApp('/modulos/cotizaciones');
+
+    expect(await screen.findByText('C-1-2856')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Control de cotizaciones' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('navigation', { name: 'Vistas de cotizaciones' }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Registro' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Clientes' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Nueva cotización/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Subir PDF/ })).not.toBeInTheDocument();
+    // Nunca consulta el módulo viejo (le respondería 403)
+    expect(llamadas('GET', '/api/cotizaciones')).toHaveLength(0);
+    expect(llamadas('GET', '/api/cotizaciones/responsables')).toHaveLength(0);
+  });
+
+  test('una ruta desconocida vuelve al índice y de ahí a Siigo', async () => {
+    backend(SUPERVISOR);
+    renderApp('/modulos/cotizaciones/algo/raro');
+    expect(await screen.findByText('C-1-2856')).toBeInTheDocument();
+  });
+
+  test('puede cambiar el estado desde la tabla', async () => {
+    const fila = await abrirSiigo(SUPERVISOR, [
+      ['PATCH', `${SIIGO}/15/estado`, () => [200, { ...FILA, estado: 'POR_EJECUTAR' }]],
+    ]);
+    fireEvent.click(within(fila).getByRole('button', { name: /Cambiar estado de C-1-2856/ }));
+    fireEvent.change(within(fila).getByLabelText('Nuevo estado de C-1-2856'), {
+      target: { value: 'POR_EJECUTAR' },
+    });
+    await waitFor(() => expect(llamadas('PATCH', `${SIIGO}/15/estado`)).toHaveLength(1));
+  });
+
+  test('puede editar el control y no se le ofrece "Crear cliente"', async () => {
+    const fila = await abrirSiigo(SUPERVISOR, [
+      ['PUT', `${SIIGO}/15/control`, () => [200, { ...DETALLE, numeroFactura: 'FV-1020' }]],
+    ]);
+    expect(screen.queryByRole('button', { name: /Crear cliente/ })).not.toBeInTheDocument();
+
+    fireEvent.click(within(fila).getByText('C-1-2856'));
+    const modal = await screen.findByRole('dialog');
+    await within(modal).findByText('24011');
+    fireEvent.change(within(modal).getByLabelText('Factura'), { target: { value: 'FV-1020' } });
+    fireEvent.click(within(modal).getByRole('button', { name: 'Guardar' }));
+
+    await waitFor(() => expect(llamadas('PUT', `${SIIGO}/15/control`)).toHaveLength(1));
+    expect(cuerpo(llamadas('PUT', `${SIIGO}/15/control`)[0]).numeroFactura).toBe('FV-1020');
+    expect(await within(modal).findByText('Control guardado.')).toBeInTheDocument();
+  });
+
+  test('con solo siigo:explorar ve la lista pero sin controles de edición', async () => {
+    backend(['siigo:explorar']);
+    renderApp('/modulos/cotizaciones');
+    const fila = (await screen.findByText('C-1-2856')).closest('tr');
+
+    expect(within(fila).getByText('Por aprobar')).toBeInTheDocument();
+    expect(within(fila).queryByRole('button', { name: /Cambiar estado/ })).not.toBeInTheDocument();
+    fireEvent.click(within(fila).getByText('C-1-2856'));
+    const modal = await screen.findByRole('dialog');
+    expect(await within(modal).findByText('Control SIEV')).toBeInTheDocument();
+    expect(within(modal).queryByRole('button', { name: 'Guardar' })).not.toBeInTheDocument();
+  });
+});

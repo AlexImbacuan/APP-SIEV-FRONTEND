@@ -1,9 +1,10 @@
 /**
  * ÚNICO lugar donde se define qué módulos existen y quién ve cada uno.
- * Cada módulo se muestra según UNA de estas dos reglas:
- *  - `permiso`: el usuario debe tener ese permiso en `usuario.permisos`
+ * Cada módulo se muestra según UNA de estas reglas:
+ *  - `permiso`:  el usuario debe tener ese permiso en `usuario.permisos`
  *    (lo que devuelve /api/auth/me). Es la forma recomendada.
- *  - `roles`:   el `usuario.rol` debe estar en la lista.
+ *  - `permisos`: lista de permisos alternativos; basta con tener uno.
+ *  - `roles`:    el `usuario.rol` debe estar en la lista.
  * Para agregar un módulo, agregue un objeto a MODULOS (la ruta se crea sola).
  * Si el módulo tiene una pantalla propia, regístrela en pages/modulos/ModuloPage.jsx.
  *
@@ -26,8 +27,8 @@ export const PERMISOS = {
   COTIZACIONES_EDITAR: 'cotizaciones:editar',
   COTIZACIONES_APROBAR: 'cotizaciones:aprobar',
   COTIZACIONES_ELIMINAR: 'cotizaciones:eliminar',
-  // Control de cotizaciones de Siigo y catálogo de clientes (hoy solo SUPERADMIN;
-  // se asignan por permiso desde la gestión de roles, nunca por nombre de rol)
+  // Control de cotizaciones de Siigo y catálogo de clientes (se asignan por permiso
+  // desde la gestión de roles, nunca por nombre de rol)
   SIIGO_EXPLORAR: 'siigo:explorar', // ver la pestaña, la lista, el detalle y sincronizar
   SIIGO_EDITAR: 'siigo:editar', // editar el control y cambiar el estado
   CLIENTES_GESTIONAR: 'clientes:gestionar', // pantalla de Clientes (crear, editar, eliminar)
@@ -88,9 +89,10 @@ export const MODULOS = [
   {
     id: 'cotizaciones',
     titulo: 'Cotizaciones',
-    descripcion: 'Registro de las cotizaciones enviadas a los clientes, con su estado y factura.',
+    descripcion: 'Cotizaciones de Siigo con su control: estado, OC, factura y pagos.',
     ruta: '/modulos/cotizaciones',
-    permiso: PERMISOS.COTIZACIONES_VER,
+    // El registro propio (cotizaciones:ver) o solo el control de Siigo (siigo:explorar)
+    permisos: [PERMISOS.COTIZACIONES_VER, PERMISOS.SIIGO_EXPLORAR],
   },
 ];
 
@@ -99,13 +101,20 @@ export function tienePermiso(usuario, permiso) {
   return Boolean(usuario?.permisos?.includes(permiso));
 }
 
+/** true si el usuario tiene al menos uno de los permisos. */
+export function tieneAlgunPermiso(usuario, permisos = []) {
+  return permisos.some((permiso) => tienePermiso(usuario, permiso));
+}
+
 /**
- * true si el usuario puede ver el módulo: por `permiso` si el módulo lo
- * define, o si no por `roles`. Sin usuario, o con rol null, no ve nada por rol.
+ * true si el usuario puede ver el módulo: por `permiso` o `permisos` (basta uno)
+ * si el módulo los define, o si no por `roles`. Sin usuario, o con rol null, no ve
+ * nada por rol.
  */
 export function puedeVer(modulo, usuario) {
   if (!usuario) return false;
   if (modulo.permiso) return tienePermiso(usuario, modulo.permiso);
+  if (modulo.permisos) return tieneAlgunPermiso(usuario, modulo.permisos);
   return Boolean(usuario.rol) && Boolean(modulo.roles?.includes(usuario.rol));
 }
 

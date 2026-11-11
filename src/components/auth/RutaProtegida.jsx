@@ -1,20 +1,21 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { tienePermiso } from '../../config/modulos';
+import { tieneAlgunPermiso, tienePermiso } from '../../config/modulos';
 import SinPermiso from '../../pages/modulos/SinPermiso';
 
 /**
  * Protege una ruta en la interfaz.
  *  - Sin sesión → redirige a /login (y vuelve a la ruta pedida después del login)
  *  - `permiso`: el usuario debe tener ese permiso en `usuario.permisos`
+ *  - `permisos`: lista de permisos alternativos; basta con tener uno
  *  - `roles`:   el `usuario.rol` debe estar en la lista
  *  - Si no cumple → página "No tienes permiso"
- *  - Sin `permiso` ni `roles` → basta con tener sesión
+ *  - Sin `permiso`, `permisos` ni `roles` → basta con tener sesión
  *
  * Es solo para la interfaz: la seguridad real la valida el backend.
  */
-export default function RutaProtegida({ roles, permiso, children }) {
+export default function RutaProtegida({ roles, permiso, permisos, children }) {
   const { usuario, cargando } = useAuth();
   const location = useLocation();
 
@@ -31,6 +32,10 @@ export default function RutaProtegida({ roles, permiso, children }) {
   }
 
   if (permiso && !tienePermiso(usuario, permiso)) {
+    return <SinPermiso />;
+  }
+
+  if (permisos && !tieneAlgunPermiso(usuario, permisos)) {
     return <SinPermiso />;
   }
 
