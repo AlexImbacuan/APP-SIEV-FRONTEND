@@ -435,3 +435,48 @@ describe('subir PDF de Siigo', () => {
     );
   });
 });
+
+// ---------- Acceso por permisos: registro propio vs. solo Siigo ----------
+describe('acceso al módulo según permisos', () => {
+  const SUPERVISOR = ['siigo:explorar', 'siigo:editar'];
+
+  test('con solo siigo:explorar/editar ve la tarjeta "Cotizaciones"', async () => {
+    backend(SUPERVISOR);
+    renderApp('/modulos');
+    expect(await screen.findByRole('heading', { name: 'Cotizaciones' })).toBeInTheDocument();
+  });
+
+  test('sin cotizaciones:ver ni siigo:explorar no ve la tarjeta', async () => {
+    backend(['usuarios:gestionar']);
+    renderApp('/modulos');
+    expect(await screen.findByRole('heading', { name: 'Usuarios' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Cotizaciones' })).not.toBeInTheDocument();
+  });
+
+  test('sin cotizaciones:ver, /nueva no muestra el formulario del registro', async () => {
+    backend(SUPERVISOR);
+    renderApp('/modulos/cotizaciones/nueva');
+    expect(await screen.findByText(/No tienes permiso/)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Subir PDF/ })).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/Cliente/)).not.toBeInTheDocument();
+  });
+
+  test('sin cotizaciones:ver, el detalle del registro no se consulta', async () => {
+    backend(SUPERVISOR);
+    renderApp('/modulos/cotizaciones/12');
+    expect(await screen.findByText(/No tienes permiso/)).toBeInTheDocument();
+    expect(llamadas('GET', '/api/cotizaciones/12')).toHaveLength(0);
+    expect(screen.queryByText('C-1-2562')).not.toBeInTheDocument();
+  });
+
+  test('con todos los permisos ve las pestañas Registro, Siigo y Clientes', async () => {
+    backend([...TODOS, 'siigo:explorar', 'siigo:editar', 'clientes:gestionar']);
+    renderApp('/modulos/cotizaciones');
+    const pestanas = await screen.findByRole('navigation', { name: 'Vistas de cotizaciones' });
+    expect(within(pestanas).getByRole('link', { name: 'Registro' })).toBeInTheDocument();
+    expect(within(pestanas).getByRole('link', { name: 'Siigo' })).toBeInTheDocument();
+    expect(within(pestanas).getByRole('link', { name: 'Clientes' })).toBeInTheDocument();
+    expect(await screen.findByText('C-1-2562')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Nueva cotización/ })).toBeInTheDocument();
+  });
+});

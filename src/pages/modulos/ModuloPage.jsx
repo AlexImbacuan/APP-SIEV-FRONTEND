@@ -25,10 +25,11 @@ export default function ModuloPage() {
   }
 
   const Pantalla = PANTALLAS[modulo.id];
-  const visiblePara = modulo.permiso ? `permiso ${modulo.permiso}` : modulo.roles.join(', ');
+  const permisos = modulo.permiso ? [modulo.permiso] : modulo.permisos;
+  const visiblePara = permisos ? `permiso ${permisos.join(' o ')}` : modulo.roles.join(', ');
 
   return (
-    <RutaProtegida roles={modulo.roles} permiso={modulo.permiso}>
+    <RutaProtegida roles={modulo.roles} permiso={modulo.permiso} permisos={modulo.permisos}>
       {Pantalla ? (
         <Pantalla modulo={modulo} />
       ) : (
