@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { PERMISOS, tienePermiso } from '../../config/modulos';
 import { cotizacionesService } from '../../services/cotizacionesService';
 import SubirPdfModal from './SubirPdfModal';
+import PestanasCotizaciones from './PestanasCotizaciones';
 import EstadoCotizacion from './EstadoCotizacion';
 import { LISTA_ESTADOS, formatearFecha, formatearMoneda } from './cotizacionesUtils';
 
@@ -131,6 +132,7 @@ export default function CotizacionesLista({ base }) {
       <Link to="/modulos" className="pl-volver">
         ← Volver al inicio
       </Link>
+      <PestanasCotizaciones base={base} />
 
       <div className="us-encabezado">
         <div>

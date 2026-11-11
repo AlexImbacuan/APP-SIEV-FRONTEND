@@ -26,6 +26,11 @@ export const PERMISOS = {
   COTIZACIONES_EDITAR: 'cotizaciones:editar',
   COTIZACIONES_APROBAR: 'cotizaciones:aprobar',
   COTIZACIONES_ELIMINAR: 'cotizaciones:eliminar',
+  // Control de cotizaciones de Siigo y catálogo de clientes (hoy solo SUPERADMIN;
+  // se asignan por permiso desde la gestión de roles, nunca por nombre de rol)
+  SIIGO_EXPLORAR: 'siigo:explorar', // ver la pestaña, la lista, el detalle y sincronizar
+  SIIGO_EDITAR: 'siigo:editar', // editar el control y cambiar el estado
+  CLIENTES_GESTIONAR: 'clientes:gestionar', // pantalla de Clientes (crear, editar, eliminar)
 };
 
 // Nombre legible de cada rol para mostrar en pantalla

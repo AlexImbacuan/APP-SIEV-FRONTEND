@@ -23,6 +23,11 @@
   animation: md-up 0.2s ease;
 }
 
+/* Para contenido con tablas (p. ej. el detalle de una cotización de Siigo) */
+.md-modal--amplio {
+  width: min(980px, 100%);
+}
+
 .md-header {
   display: flex;
   align-items: center;

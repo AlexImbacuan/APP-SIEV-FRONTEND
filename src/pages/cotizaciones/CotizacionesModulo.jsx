@@ -5,6 +5,8 @@ import { PERMISOS } from '../../config/modulos';
 import CotizacionesLista from './CotizacionesLista';
 import CotizacionDetalle from './CotizacionDetalle';
 import CotizacionForm from './CotizacionForm';
+import SiigoCotizaciones from './siigo/SiigoCotizaciones';
+import ClientesPage from './clientes/ClientesPage';
 import '../../components/ui/Modal.css';
 import '../usuarios/UsuariosPage.css';
 import './Cotizaciones.css';
@@ -14,6 +16,8 @@ import './Cotizaciones.css';
  * Subrutas:
  *   /modulos/cotizaciones                → lista
  *   /modulos/cotizaciones/nueva          → formulario nuevo (también desde PDF de Siigo)
+ *   /modulos/cotizaciones/siigo          → control de cotizaciones de Siigo (siigo:explorar)
+ *   /modulos/cotizaciones/clientes       → catálogo de clientes (clientes:gestionar)
  *   /modulos/cotizaciones/:id            → detalle
  *   /modulos/cotizaciones/:id/editar     → formulario de edición
  */
@@ -28,6 +32,22 @@ export default function CotizacionesModulo({ modulo }) {
         element={
           <RutaProtegida permiso={PERMISOS.COTIZACIONES_CREAR}>
             <CotizacionForm base={base} />
+          </RutaProtegida>
+        }
+      />
+      <Route
+        path="siigo"
+        element={
+          <RutaProtegida permiso={PERMISOS.SIIGO_EXPLORAR}>
+            <SiigoCotizaciones base={base} />
+          </RutaProtegida>
+        }
+      />
+      <Route
+        path="clientes"
+        element={
+          <RutaProtegida permiso={PERMISOS.CLIENTES_GESTIONAR}>
+            <ClientesPage base={base} />
           </RutaProtegida>
         }
       />
